@@ -19,10 +19,26 @@ const userSchema = new Schema({
     required: true,
     minlength: 5,
   },
-  thoughts: [
+  jobStatus: {
+    required: false,
+    type: String
+    //default:
+  },
+  Linkedin: {
+    type: true,
+    required: false
+    //default
+  },
+  gitHub: {
+    type: String,
+    required: false
+    //default: 
+  },
+
+  projects: [
     {
       type: Schema.Types.ObjectId,
-      ref: 'Thought',
+      ref: 'Project',
     },
   ],
 });

@@ -1,5 +1,5 @@
 const { Schema, model } = require('mongoose');
-const dateFormat = require('../utils/dateFormat');
+
 
 const projectSchema = new Schema({
   description: {
@@ -9,21 +9,30 @@ const projectSchema = new Schema({
     maxlength: 280,
     trim: true,
   },
+
+  projectAuthor: {
+    type: String,
+    required: true
+  },
+
   title: {
     type: String,
     required: true,
     trim: true,
   },
+
   githubRepo: {
     type: String,
     required: true,
   },
+
   contactInfo: {
     type: String,
     required: true,
   }
 
-  // Possible feature we cna use for commenting on projects
+  // Possible feature we can use for commenting on projects
+  // const dateFormat = require('../utils/dateFormat');
   // comments: [
   //   {
   //     commentText: {
@@ -45,6 +54,6 @@ const projectSchema = new Schema({
   // ],
 });
 
-const Porject = model('Project', projectSchema);
+const Project = model('Project', projectSchema);
 
 module.exports = Project;

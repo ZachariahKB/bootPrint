@@ -24,8 +24,8 @@ const userSchema = new Schema({
     type: String
     //default:
   },
-  Linkedin: {
-    type: true,
+  linkedin: {
+    type: String,
     required: false
     //default
   },

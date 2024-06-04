@@ -11,7 +11,7 @@ import ErrorPage from './pages/ErrorPage';
 //add more and add them below
 const router = createBrowserRouter([
   {
-    path: "/login",
+    path: "/",
     element: <App />,
     errorElement: <ErrorPage />,// change routes
     children: [
@@ -27,13 +27,15 @@ const router = createBrowserRouter([
       }, {
         path: '/profiles/:username',
         element: <Profile />
-      }, {
-        path: '/me',
-        element: <Profile />
-      }, {
-        path: '/thoughts/:thoughtId',
-        element: <SingleThought />
-      }
+      },
+      //  {
+      //   path: '/me',
+      //   element: <Profile />
+      //  },
+      // {
+      //   path: '/thoughts/:thoughtId',
+      //   element: <SingleThought />
+      // }
     ]
   },
 ]);

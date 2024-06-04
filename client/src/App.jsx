@@ -41,21 +41,15 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <CssBaseline />
-      <Router>
         <Box display="flex" flexDirection="column" minHeight="100vh">
           <Header />
           <Container component="main" sx={{ flex: 1, py: 2 }}>
-            <Routes>
-              <Route path="/signin" element={<SignIn />} />
-              <Route path="/signup" element={<SignUp />} />
-              <Route path="/dashboard" element={<div>Dashboard</div>} /> {/* Placeholder for your dashboard */}
-              <Route path="/" element={<div>Home</div>} /> {/* Placeholder for your home page */}
-            </Routes>
+              <Outlet/>
           </Container>
           <Footer />
         </Box>
-      </Router>
     </ApolloProvider>
+      
   );
 }
 

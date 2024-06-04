@@ -4,10 +4,10 @@ const typeDefs = `
     username: String
     email: String
     password: String
-    thoughts: [Thought]!
+    projects: [Project]!
   }
 
-  type Thought {
+  type  {
     _id: ID
     thoughtText: String
     thoughtAuthor: String

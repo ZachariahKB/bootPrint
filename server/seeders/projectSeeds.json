@@ -1,0 +1,30 @@
+[
+  {
+    "description": "Develop a web or mobile application that helps users track their personal finances. The app will allow users to input their income, expenses, and savings goals. It will provide visual reports, budget suggestions, and alerts for unusual spending patterns.",
+    "projectAuthor": "Pauleee Nelson",
+    "title":" Personal Finance Management App ", 
+    "githubRepo": " Finance-Management ",
+    "contactInfo": " email "
+  },
+  {
+    "description": "Create a smart home control system that allows users to manage and monitor their home devices (lights, thermostat, security cameras, etc.) through a centralized interface. The system can include voice control and automation based on user-defined rules.",
+    "projectAuthor": "Zachariahhh Keiler",
+    "title":"  Smart Home Control System ", 
+    "githubRepo": " home-control-system ",
+    "contactInfo": " email "
+  },
+  {
+    "description": "Build an e-learning platform that allows educators to create and share courses, and students to enroll in and complete these courses. The platform will support video lessons, quizzes, assignments, and discussion forums.",
+    "projectAuthor": "Edwin Mbaaabu",
+    "title":"  E-Learning Platform ", 
+    "githubRepo": " E-learning-platform ",
+    "contactInfo": " email "
+  },
+  {
+    "description": "Develop a health and fitness tracking app that helps users monitor their physical activity, diet, and overall health metrics. The app will allow users to set fitness goals, track workouts, log meals, and analyze their progress over time.",
+    "projectAuthor": "Joshua Urrrutia",
+    "title":" Health and Fitness Tracker ", 
+    "githubRepo": " health-tracking ",
+    "contactInfo": " email "
+  }
+]

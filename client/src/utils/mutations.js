@@ -24,6 +24,16 @@ export const ADD_USER = gql`
   }
 `;
 
+export const ADD_PROJECT = gql`
+mutation AddProject($title: String!, $description: String!, $githubRepo: String!, $contactInfo: String!) {
+  addProject(title: $title, description: $description, githubRepo: $githubRepo, contactInfo: $contactInfo) {
+    contactInfo
+    description
+    githubRepo
+    title
+  }
+}
+`
 export const ADD_THOUGHT = gql`
   mutation addThought($thoughtText: String!) {
     addThought(thoughtText: $thoughtText) {

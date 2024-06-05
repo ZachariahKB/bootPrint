@@ -1,7 +1,7 @@
 import { Navigate, useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 
-import ThoughtForm from '../components/ThoughtForm';
+import ProjectForm from '../components/ProjectForm';
 import ThoughtList from '../components/ThoughtList';
 
 import { QUERY_USER, QUERY_ME } from '../utils/queries';

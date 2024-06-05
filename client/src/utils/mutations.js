@@ -34,33 +34,30 @@ mutation AddProject($title: String!, $description: String!, $githubRepo: String!
   }
 }
 `
-export const ADD_THOUGHT = gql`
-  mutation addThought($thoughtText: String!) {
-    addThought(thoughtText: $thoughtText) {
-      _id
-      thoughtText
-      thoughtAuthor
-      createdAt
-      comments {
-        _id
-        commentText
-      }
-    }
+export const REMOVE_PROJECT = gql`
+mutation RemoveProject($projectId: ID!) {
+  removeProject(projectId: $projectId) {
+    title
   }
+}
 `;
 
-export const ADD_COMMENT = gql`
-  mutation addComment($thoughtId: ID!, $commentText: String!) {
-    addComment(thoughtId: $thoughtId, commentText: $commentText) {
-      _id
-      thoughtText
-      thoughtAuthor
-      createdAt
-      comments {
-        _id
-        commentText
-        createdAt
-      }
-    }
-  }
-`;
+
+
+//TODO: Do we need this?
+
+// export const ADD_COMMENT = gql`
+//   mutation addComment($thoughtId: ID!, $commentText: String!) {
+//     addComment(thoughtId: $thoughtId, commentText: $commentText) {
+//       _id
+//       thoughtText
+//       thoughtAuthor
+//       createdAt
+//       comments {
+//         _id
+//         commentText
+//         createdAt
+//       }
+//     }
+//   }
+// `;

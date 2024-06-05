@@ -23,6 +23,7 @@ function Copyright(props) {
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
       <Link color="inherit" href="https://mui.com/">
+         {/* Add a link to website here */}
         Your Website
       </Link>{' '}
       {new Date().getFullYear()}
@@ -144,6 +145,7 @@ export default function SignInSide() {
                     </Link>
                   </Grid> */}
                   <Grid item>
+                    {/*TODO: Add link to signup page (#) */}
                     <Link component={RouterLink} to="#" variant="body2">
                       {"Don't have an account? Sign Up"}
                     </Link>

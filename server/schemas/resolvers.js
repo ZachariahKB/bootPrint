@@ -12,6 +12,7 @@ const resolvers = {
     projects: async (parent, { username }) => {
       const params = username ? { username } : {};
       return Project.find(params).sort({ createdAt: -1 });
+    //TODO: Create a single project if we have time
     },
     resources: async (parent, { username })=>{
       const params = username ? { username }: {};

@@ -18,6 +18,11 @@ const typeDefs = `
     contactInfo: String
     # comments: [Comment]!
   }
+  type Resources {
+    _id: ID
+    topic: String
+    content: String  
+  }
 
   #type Comment {
     #_id: ID
@@ -35,6 +40,7 @@ const typeDefs = `
     users: [User]
     user(username: String!): User
     projects(username: String): [Project]
+    resources(username:String):[Resources]
     me: User
   }
 
@@ -43,6 +49,8 @@ const typeDefs = `
     login(email: String!, password: String!): Auth
     addProject(description: String!, title: String!, githubRepo: String!, contactInfo:String! ): Project
     removeProject(projectId: ID!): Project
+    addResource(topic: String!, content:String!):Resources
+    removeResource(resourceId:ID!): Resources
   }
 `;
 

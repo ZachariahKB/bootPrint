@@ -6,7 +6,7 @@ import App from './App.jsx';
 import Home from './pages/Home';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
-import SingleThought from './pages/SingleThought';//change
+// import SingleThought from './pages/SingleThought';//change
 import Profile from './pages/Profile';
 import ErrorPage from './pages/ErrorPage';
 //add more and add them below

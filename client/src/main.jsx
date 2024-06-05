@@ -1,5 +1,6 @@
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { ThemeProvider, createTheme, CssBaseline } from '@mui/material';
 
 import App from './App.jsx';
 import Home from './pages/Home';
@@ -9,6 +10,7 @@ import SingleThought from './pages/SingleThought';//change
 import Profile from './pages/Profile';
 import ErrorPage from './pages/ErrorPage';
 //add more and add them below
+const defaultTheme = createTheme();
 const router = createBrowserRouter([
   {
     path: "/",
@@ -41,5 +43,8 @@ const router = createBrowserRouter([
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <RouterProvider router={router} />
-)
+  <ThemeProvider theme={defaultTheme}>
+    <CssBaseline />
+    <RouterProvider router={router} />
+  </ThemeProvider>
+);

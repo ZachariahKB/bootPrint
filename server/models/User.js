@@ -21,18 +21,18 @@ const userSchema = new Schema({
   },
   jobStatus: {
     required: false,
-    type: String
-    //default:
+    type: String,
+    default: 'Unspecified'
   },
   linkedin: {
     type: String,
-    required: false
-    //default
+    required: false,
+    default: 'Unspecified'
   },
   gitHub: {
     type: String,
-    required: false
-    //default: 
+    required: false,
+    default: 'Unspecified'
   },
 
   projects: [

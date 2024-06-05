@@ -10,32 +10,15 @@ export const QUERY_USER = gql`
   }
 `;
 
-export const QUERY_THOUGHTS = gql`
-  query getThoughts {
-    thoughts {
-      _id
-      thoughtText
-      thoughtAuthor
-      createdAt
-    }
+export const QUERY_PROJECTS= gql`
+query Projects {
+  projects {
+    contactInfo
+    description
+    githubRepo
+    title
   }
-`;
-
-export const QUERY_SINGLE_THOUGHT = gql`
-  query getSingleThought($thoughtId: ID!) {
-    thought(thoughtId: $thoughtId) {
-      _id
-      thoughtText
-      thoughtAuthor
-      createdAt
-      comments {
-        _id
-        commentText
-        commentAuthor
-        createdAt
-      }
-    }
-  }
+}
 `;
 
 export const QUERY_ME = gql`
@@ -44,10 +27,10 @@ export const QUERY_ME = gql`
       _id
       username
       email
-      thoughts {
+      projects {
         _id
-        thoughtText
-        thoughtAuthor
+        description
+        projectAuthor
         createdAt
       }
     }

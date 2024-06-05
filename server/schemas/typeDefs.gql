@@ -16,6 +16,7 @@ const typeDefs = `
     title: String
     githubRepo: String
     contactInfo: String
+    projectAuthor: String
     # comments: [Comment]!
   }
   type Resources {

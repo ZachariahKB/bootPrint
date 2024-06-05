@@ -1,34 +1,34 @@
 import { useQuery } from '@apollo/client';
 
-// import ThoughtList from '../components/ThoughtList';
-// import ThoughtForm from '../components/ThoughtForm';
+import ProjectList from '../components/ProjectList';
+import ProjectForm from '../components/ProjectForm';
 
-import { QUERY_THOUGHTS } from '../utils/queries';
+import { QUERY_PROJECTS } from '../utils/queries';
 
 const Home = () => {
-  const { loading, data } = useQuery(QUERY_THOUGHTS);
-  const thoughts = data?.thoughts || [];
+  const { loading, data } = useQuery(QUERY_PROJECTS);
+  const projects = data?.projects || [];
 
   return (
     <main>
       <div className="flex-row justify-center">
-        BOOM
-        {/* <div
+        
+        <div
           className="col-12 col-md-10 mb-3 p-3"
           style={{ border: '1px dotted #1a1a1a' }}
         >
-          <ThoughtForm />
+          <ProjectForm />
         </div>
         <div className="col-12 col-md-8 mb-3">
           {loading ? (
             <div>Loading...</div>
           ) : (
-            <ThoughtList
-              thoughts={thoughts}
+            <ProjectList
+              projects={projects}
               title="Some Feed for Thought(s)..."
             />
           )}
-        </div> */}
+        </div>
       </div>
     </main>
   );

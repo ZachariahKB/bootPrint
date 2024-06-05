@@ -1,4 +1,4 @@
-const { User, Project } = require('../models');
+const { User, Project, Resources } = require('../models');
 const { signToken, AuthenticationError } = require('../utils/auth');
 
 const resolvers = {
@@ -12,6 +12,10 @@ const resolvers = {
     projects: async (parent, { username }) => {
       const params = username ? { username } : {};
       return Project.find(params).sort({ createdAt: -1 });
+    },
+    resources: async (parent, { username })=>{
+      const params = username ? { username }: {};
+      return Resources.find(params).sort({createdAt: -1 });
     },
     me: async (parent, args, context) => {
       if (context.user) {
@@ -44,10 +48,13 @@ const resolvers = {
 
       return { token, user };
     },
-    addProject: async (parent, { description }, context) => {
+    addProject: async (parent, { description, title, githubRepo, contactInfo }, context) => {
       if (context.user) {
         const project = await Project.create({
           description,
+          title,
+          githubRepo,
+          contactInfo,
           projectAuthor: context.user.username,
         });
 
@@ -57,6 +64,24 @@ const resolvers = {
         );
 
         return project;
+      }
+      throw AuthenticationError;
+      ('You need to be logged in!');
+    },
+    addResource: async (parent, { topic, content }, context) => {
+      if (context.user) {
+        const resources = await Resources.create({
+          topic,
+          content,
+          resourcesAuthor: context.user.username,
+        });
+
+        await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $addToSet: { resources: resources._id } }
+        );
+
+        return resources;
       }
       throw AuthenticationError;
       ('You need to be logged in!');
@@ -74,6 +99,22 @@ const resolvers = {
         );
 
         return project;
+      }
+      throw AuthenticationError;
+    },
+    removeResource: async (parent, { resourcesId }, context) => {
+      if (context.user) {
+        const resources = await Resources.findOneAndDelete({
+          _id: resourcesId,
+          resourcesAuthor: context.user.username,
+        });
+
+        await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $pull: { resources: resources._id } }
+        );
+
+        return resources;
       }
       throw AuthenticationError;
     },

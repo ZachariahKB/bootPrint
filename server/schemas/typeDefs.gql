@@ -16,21 +16,23 @@ const typeDefs = `
     title: String
     githubRepo: String
     contactInfo: String
+    createdAt: String
     projectAuthor: String
-    # comments: [Comment]!
+    comments: [Comment]!
   }
   type Resources {
     _id: ID
     topic: String
     content: String  
+    createdAt: String
   }
 
-  #type Comment {
-    #_id: ID
-    #commentText: String
-    #commentAuthor: String
-    #createdAt: String
- #}
+  type Comment {
+    _id: ID
+    commentText: String
+    commentAuthor: String
+    createdAt: String
+ }
 
   type Auth {
     token: ID!
@@ -41,7 +43,8 @@ const typeDefs = `
     users: [User]
     user(username: String!): User
     projects(username: String): [Project]
-    resources(username:String):[Resources]
+    project(projectId: ID!): Project
+    resources(username:String, topic: String):[Resources]
     me: User
   }
 
@@ -49,9 +52,11 @@ const typeDefs = `
     addUser(username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
     addProject(description: String!, title: String!, githubRepo: String!, contactInfo:String! ): Project
+    addResource(topic: String!, content: String!):Resources
+    addComment(projectId: ID!, commentText: String!): Project
     removeProject(projectId: ID!): Project
-    addResource(topic: String!, content:String!):Resources
-    removeResource(resourceId:ID!): Resources
+    removeResource(resourcesId: ID!): Resources
+    removeComment(projectId: ID!, commentId: ID!): Project
   }
 `;
 

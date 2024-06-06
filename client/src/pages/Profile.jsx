@@ -2,7 +2,7 @@ import { Navigate, useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 
 import ProjectForm from '../components/ProjectForm';
-import ThoughtList from '../components/ThoughtList';
+import ProjectList from '../components/ProjectList';
 
 import { QUERY_USER, QUERY_ME } from '../utils/queries';
 
@@ -22,9 +22,9 @@ const Profile = () => {
   console.log(data)
   const user = data?.user || {};
   // navigate to personal profile page if username is yours
-  // if (Auth.loggedIn() && Auth.getProfile().data.username === username) {
-  //   return <Navigate to="/me" />;
-  // }
+  if (Auth.loggedIn() && Auth.getProfile().data.username === username) {
+    return <Navigate to="/me" />;
+  }
 
   if (loading) {
     return <div>Loading...</div>;
@@ -46,10 +46,10 @@ const Profile = () => {
           Viewing {username ? `${user.username}'s` : 'your'} profile.
         </h2>
         {/* Problem with being able to see a profile even if logged out */}
-        {/* <div className="col-12 col-md-10 mb-5">
-          <ThoughtList
-            thoughts={user.thoughts}
-            title={`${user.username}'s thoughts...`}
+        <div className="col-12 col-md-10 mb-5">
+          <ProjectList
+            projects={user.projects}
+            title={`${user.username}'s projects...`}
             showTitle={false}
             showUsername={false}
           />
@@ -59,12 +59,11 @@ const Profile = () => {
             className="col-12 col-md-10 mb-3 p-3"
             style={{ border: '1px dotted #1a1a1a' }}
           >
-            <ThoughtForm />
+            <ProjectForm />
           </div>
         )}
-      </div> */}
       </div>
-    </div>
+      </div>
   );
 };
 

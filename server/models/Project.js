@@ -1,4 +1,5 @@
 const { Schema, model } = require('mongoose');
+const dateFormat = require('../utils/dateFormat');
 
 
 const projectSchema = new Schema({
@@ -29,29 +30,32 @@ const projectSchema = new Schema({
   contactInfo: {
     type: String,
     required: true,
-  }
-
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+    get: (timestamp) => dateFormat(timestamp),
+  },
   // Possible feature we can use for commenting on projects
-  // const dateFormat = require('../utils/dateFormat');
-  // comments: [
-  //   {
-  //     commentText: {
-  //       type: String,
-  //       required: true,
-  //       minlength: 1,
-  //       maxlength: 280,
-  //     },
-  //     commentAuthor: {
-  //       type: String,
-  //       required: true,
-  //     },
-  //     createdAt: {
-  //       type: Date,
-  //       default: Date.now,
-  //       get: (timestamp) => dateFormat(timestamp),
-  //     },
-  //   },
-  // ],
+  comments: [
+    {
+      commentText: {
+        type: String,
+        required: true,
+        minlength: 1,
+        maxlength: 280,
+      },
+      commentAuthor: {
+        type: String,
+        required: true,
+      },
+      createdAt: {
+        type: Date,
+        default: Date.now,
+        get: (timestamp) => dateFormat(timestamp),
+      },
+    },
+  ],
 });
 
 const Project = model('Project', projectSchema);

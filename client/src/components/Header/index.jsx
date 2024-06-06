@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-
 import Auth from '../../utils/auth';
 
 const Header = () => {
@@ -7,18 +6,39 @@ const Header = () => {
     event.preventDefault();
     Auth.logout();
   };
+
   return (
     <header className="bg-primary text-light mb-4 py-3 flex-row align-center">
       <div className="container flex-row justify-space-between-lg justify-center align-center">
         <div>
           <Link className="text-light" to="/">
-            <h1 className="m-0"> 🥾BootPrint👣 </h1>
+            <h1 className="m-0">🥾BootPrint👣</h1>
           </Link>
-          {/* How we can add text to header */}
           <p className="m-0">These Boots Are Made For Coding!</p>
         </div>
+        {Auth.loggedIn() && (
+          <nav>
+            <ul className="nav">
+              <li className="nav-item">
+                <Link className="nav-link text-light" to="/">
+                  Home
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link text-light" to="/projects">
+                  Projects
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link text-light" to="/about">
+                  About
+                </Link>
+              </li>
+              {/* Add more nav links as needed */}
+            </ul>
+          </nav>
+        )}
         <div>
-        <p className="m-0 ">Please Login or Sign up!</p>
           {Auth.loggedIn() ? (
             <>
               <Link className="btn btn-lg btn-info m-2" to={`/profiles/${Auth.getProfile().data.username}`}>
@@ -29,14 +49,7 @@ const Header = () => {
               </button>
             </>
           ) : (
-            <>
-              <Link className="btn btn-lg btn-info m-2" to="/login">
-                Login
-              </Link>
-              <Link className="btn btn-lg btn-light m-2" to="/signup">
-                Signup
-              </Link>
-            </>
+            <p className="m-0"></p>
           )}
         </div>
       </div>

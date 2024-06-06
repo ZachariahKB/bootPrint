@@ -12,11 +12,13 @@ const Header = () => {
       <div className="container flex-row justify-space-between-lg justify-center align-center">
         <div>
           <Link className="text-light" to="/">
-            <h1 className="m-0">Tech Thoughts</h1>
+            <h1 className="m-0"> 🥾BootPrint👣 </h1>
           </Link>
-          <p className="m-0">Get into the mind of a programmer.</p>
+          {/* How we can add text to header */}
+          <p className="m-0">These Boots Are Made For Coding!</p>
         </div>
         <div>
+        <p className="m-0 ">Please Login or Sign up!</p>
           {Auth.loggedIn() ? (
             <>
               <Link className="btn btn-lg btn-info m-2" to={`/profiles/${Auth.getProfile().data.username}`}>

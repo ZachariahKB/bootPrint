@@ -37,15 +37,15 @@ const defaultTheme = createTheme();
 export default function SignInSide() {
   const [formState, setFormState] = useState({ email: '', password: '' });
   const [login, { error, data }] = useMutation(LOGIN_USER);
-  //const [loginUser, setloginUser] = useState(false)
-  //let navigate = useNavigate()
+  const [loginUser, setloginUser] = useState(false)
+  let navigate = useNavigate()
   console.log("this is login user = ", loginUser)
 
-  // useEffect(()=>{
-  //   if(loginUser){
-  //     return redirect("/home")
-  //   }
-  // },[loginUser])
+  useEffect(()=>{
+    if(loginUser){
+      return redirect("/home")
+    }
+  },[loginUser])
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormState({
@@ -61,7 +61,7 @@ export default function SignInSide() {
         variables: { ...formState },
       });
       Auth.login(data.login.token);
-      //navigate("/home")
+      navigate("/home")
       setloginUser(true)
     } catch (e) {
       console.error(e);
@@ -71,10 +71,10 @@ export default function SignInSide() {
       password: '',
     });
   };
-  // if(loginUser){
-  //   console.log("we are in!!!!!!!")
-  //   return navigate("/home")
-  // }
+  if(loginUser){
+    console.log("we are in!!!!!!!")
+    return navigate("/home")
+  }
 
   return (
     <ThemeProvider theme={defaultTheme}>

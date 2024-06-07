@@ -12,7 +12,7 @@ const Profile = () => {
   const { username } = useParams(); 
   console.log("hello")
   
-  console.log(username)
+  console.log('username',username)
 
   console.log("goodbye")
 

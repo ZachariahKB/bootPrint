@@ -13,6 +13,7 @@ query user($username: String) {
         githubRepo
         description
         createdAt
+        contactInfo
       }
     }
 }

@@ -12,8 +12,7 @@ const ProjectForm = () => {
 
   const [characterCount, setCharacterCount] = useState(0);
 
-  const [addProject, { error }] = useMutation
-  (ADD_PROJECT, {
+  const [addProject, { error }] = useMutation(ADD_PROJECT, {
     refetchQueries: [
       QUERY_PROJECTS,
       'getProject',
@@ -26,7 +25,7 @@ const ProjectForm = () => {
     event.preventDefault();
 
     try {
-      const { data } = await addProject({
+      await addProject({
         variables: {
           description,
           projectAuthor: Auth.getProfile().data.username,

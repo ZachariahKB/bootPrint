@@ -25,8 +25,6 @@ const resolvers = {
       const params = topic ? {  topic}: {};
       return Resources.find(params).sort({createdAt: -1 });
     },
-    // TODO discus do we really need to get one resource???
-    //TODO discus  geting a single 
 
     me: async (parent, args, context) => {
       if (context.user) {

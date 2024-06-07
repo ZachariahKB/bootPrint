@@ -5,8 +5,8 @@ import { useQuery } from '@apollo/client';
 // import CommentList from '../components/CommentList';
 // import CommentForm from '../components/CommentForm';
 
-//TODO: Create QUERY_SINGLE_THOUGHT query
-// import { QUERY_SINGLE_THOUGHT } from '../utils/queries';
+// QUERY_SINGLE_PROJECT query
+import { QUERY_SINGLE_PROJECT } from '../utils/queries';
 
 const SingleProject = () => {
   // Use `useParams()` to retrieve value of the route parameter `:profileId`

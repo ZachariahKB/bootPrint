@@ -51,5 +51,5 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <ThemeProvider theme={defaultTheme}>
     {/* <CssBaseline /> */}
     <RouterProvider router={router} />
-  </ThemeProvider>
+   </ThemeProvider>
 );

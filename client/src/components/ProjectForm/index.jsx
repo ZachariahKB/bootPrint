@@ -9,11 +9,12 @@ import Auth from '../../utils/auth';
 
 const ProjectForm = () => {
   const [description, setDescription] = useState('');
-
+  const [title, setTitle] = useState('');
+  const [githubRepo, setGithubRepo] = useState('');
+  const [contactInfo, setContactInfo] = useState('');
   const [characterCount, setCharacterCount] = useState(0);
 
-  const [addProject, { error }] = useMutation
-  (ADD_PROJECT, {
+  const [addProject, { error }] = useMutation(ADD_PROJECT, {
     refetchQueries: [
       QUERY_PROJECTS,
       'getProject',
@@ -29,11 +30,17 @@ const ProjectForm = () => {
       const { data } = await addProject({
         variables: {
           description,
+          title,
+          githubRepo,
+          contactInfo,
           projectAuthor: Auth.getProfile().data.username,
         },
       });
 
       setDescription('');
+      setTitle('');
+      setGithubRepo('');
+      setContactInfo('');
     } catch (err) {
       console.error(err);
     }
@@ -42,15 +49,30 @@ const ProjectForm = () => {
   const handleChange = (event) => {
     const { name, value } = event.target;
 
-    if (name === 'description' && value.length <= 280) {
-      setDescription(value);
-      setCharacterCount(value.length);
+    switch (name) {
+      case 'description':
+        if (value.length <= 280) {
+          setDescription(value);
+          setCharacterCount(value.length);
+        }
+        break;
+      case 'title':
+        setTitle(value);
+        break;
+      case 'githubRepo':
+        setGithubRepo(value);
+        break;
+      case 'contactInfo':
+        setContactInfo(value);
+        break;
+      default:
+        break;
     }
   };
 
   return (
     <div>
-      <h3>Please add a description of your project ya dig?</h3>
+      <h3>Please add a description of your project</h3>
 
       {Auth.loggedIn() ? (
         <>
@@ -64,19 +86,44 @@ const ProjectForm = () => {
           <form
             className="flex-row justify-center justify-space-between-md align-center"
             onSubmit={handleFormSubmit}
+            style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
           >
             <div className="col-12 col-lg-9">
+              <input
+                type="text"
+                name="title"
+                placeholder="Project Title"
+                value={title}
+                className="form-input w-100"
+                onChange={handleChange}
+              />
               <textarea
                 name="description"
-                placeholder="Here's a new project..."
+                placeholder="Add your project idea here..."
                 value={description}
                 className="form-input w-100"
                 style={{ lineHeight: '1.5', resize: 'vertical' }}
                 onChange={handleChange}
               ></textarea>
+              <input
+                type="text"
+                name="githubRepo"
+                placeholder="GitHub Repository URL"
+                value={githubRepo}
+                className="form-input w-100"
+                onChange={handleChange}
+              />
+              <input
+                type="text"
+                name="contactInfo"
+                placeholder="Contact Information"
+                value={contactInfo}
+                className="form-input w-100"
+                onChange={handleChange}
+              />
             </div>
 
-            <div className="col-12 col-lg-3">
+            <div className="col-12 col-lg-3" style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
               <button className="btn btn-primary btn-block py-3" type="submit">
                 Add Project
               </button>
@@ -90,7 +137,7 @@ const ProjectForm = () => {
         </>
       ) : (
         <p>
-          You need to be logged in to share add A project. Please{' '}
+          You need to be logged in to share add a project. Please{' '}
           <Link to="/login">login</Link> or <Link to="/signup">signup.</Link>
         </p>
       )}

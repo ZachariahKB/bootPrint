@@ -64,19 +64,7 @@ const Footer = () => {
           >
             &larr; Go Back
           </button>
-        )}
-        <h4>
-          Made with
-          <span
-            className="emoji"
-            role="img"
-            aria-label="heart"
-            aria-hidden="false"
-          >
-            ❤️
-          </span>
-          by the Tech Thoughts team.
-        </h4>
+        )}Check use out at our GitHubs!
         <GitHubLinks>
           {teamMembers.map(member => (
             <a key={member.name} href={member.github} target="_blank" rel="noopener noreferrer">

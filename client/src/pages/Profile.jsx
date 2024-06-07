@@ -10,21 +10,24 @@ import Auth from '../utils/auth';
 
 const Profile = () => {
   const { username } = useParams(); 
-  console.log("hello")
+  // console.log("hello")
   
-  console.log('username',username)
+  // console.log('username',username)
 
-  console.log("goodbye")
+  // console.log("goodbye")
 
-  const { loading, data } = useQuery(username ? QUERY_USER : QUERY_ME, {
+  // const { loading, data } = useQuery(username ? QUERY_USER : QUERY_ME, {
+  //   variables: { username: username },
+  // });
+  const { loading, data } = useQuery( QUERY_USER , {
     variables: { username: username },
   });
   console.log(data)
   const user = data?.user || {};
   // navigate to personal profile page if username is yours
-  if (Auth.loggedIn() && Auth.getProfile().data.username === username) {
-    return <Navigate to="/me" />;
-  }
+  // if (Auth.loggedIn() && Auth.getProfile().data.username === username) {
+  //   return <Navigate to="/me" />;
+  // }
 
   if (loading) {
     return <div>Loading...</div>;
@@ -43,7 +46,7 @@ const Profile = () => {
     <div>
       <div className="flex-row justify-center mb-3">
         <h2 className="col-12 col-md-10 bg-dark text-light p-3 mb-5">
-          Viewing {username ? `${user.username}'s` : 'your'} profile.
+          Viewing {username ? `${username}'s` : 'your'} profile.
         </h2>
         {/* Problem with being able to see a profile even if logged out */}
         <div className="col-12 col-md-10 mb-5">

@@ -8,8 +8,15 @@ const resolvers = {
       return User.find().populate('projects');
     },
     // finding one user and the projects
-    user: async (parent, { username }) => {
-      return User.findOne({ username }).populate('projects');
+    user: async (parent, { username }, context) => {
+      console.log("we made it",username);
+      if (context.user) {
+        if( username ){
+        return User.findOne({ username }).populate('projects');
+      }
+      return User.findOne({ _id: context.user._id }).populate('projects');
+    }
+      throw AuthenticationError;
     },
     // get all the projects
     projects: async (parent, { username }) => {

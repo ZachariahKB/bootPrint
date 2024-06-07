@@ -45,10 +45,10 @@ const SingleProject = () => {
       </div>
 
       <div className="my-5">
-        <CommentList comments={project.comments} />
+        {/* <CommentList comments={project.comments} /> */}
       </div>
       <div className="m-3 p-4" style={{ border: '1px dotted #1a1a1a' }}>
-        <CommentForm projectId={project._id} />
+        {/* <CommentForm projectId={project._id} /> */}
       </div>
     </div>
   );

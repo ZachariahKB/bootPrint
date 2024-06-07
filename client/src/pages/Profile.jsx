@@ -10,9 +10,9 @@ import Auth from '../utils/auth';
 
 const Profile = () => {
   const { username } = useParams(); 
-  // console.log("hello")
+  console.log("hello")
   
-  // console.log('username',username)
+  console.log('username',username)
 
   // console.log("goodbye")
 
@@ -50,12 +50,12 @@ const Profile = () => {
         </h2>
         {/* Problem with being able to see a profile even if logged out */}
         <div className="col-12 col-md-10 mb-5">
-          <ProjectList
+          {/* <ProjectList
             projects={user.projects}
             title={`${user.username}'s projects...`}
             showTitle={false}
             showUsername={false}
-          />
+          /> */}
         </div>
         {!username && (
           <div

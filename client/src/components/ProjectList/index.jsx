@@ -24,13 +24,13 @@ const ProjectList = ({
                 >
                   {project.projectAuthor} <br />
                   <span style={{ fontSize: '1rem' }}>
-                    had this thought on {project.createdAt}
+                    Project created on: {project.createdAt}
                   </span>
                 </Link>
               ) : (
                 <>
                   <span style={{ fontSize: '1rem' }}>
-                    You had this thought on {project.createdAt}
+                    You made this project on:  {project.createdAt}
                   </span>
                 </>
               )}
@@ -42,7 +42,7 @@ const ProjectList = ({
               className="btn btn-primary btn-block btn-squared"
               to={`/project/${project._id}`}
             >
-              Join the discussion on this thought.
+              Leave a comment on this project!
             </Link>
           </div>
         ))}

@@ -27,7 +27,7 @@ const ProjectForm = () => {
     event.preventDefault();
 
     try {
-      const { data } = await addProject({
+      await addProject({
         variables: {
           description,
           title,

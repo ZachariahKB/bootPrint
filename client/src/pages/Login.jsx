@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link as RouterLink, useNavigate, redirect } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../utils/mutations';
 import Auth from '../utils/auth';
@@ -22,9 +22,9 @@ function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
+      <Link color="inherit" href="https://project-3-il5t.onrender.com/">
          {/* Add a link to website here */}
-        Your Website
+        BootPrint
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -37,7 +37,15 @@ const defaultTheme = createTheme();
 export default function SignInSide() {
   const [formState, setFormState] = useState({ email: '', password: '' });
   const [login, { error, data }] = useMutation(LOGIN_USER);
+  //const [loginUser, setloginUser] = useState(false)
+  //let navigate = useNavigate()
+  console.log("this is login user = ", loginUser)
 
+  // useEffect(()=>{
+  //   if(loginUser){
+  //     return redirect("/home")
+  //   }
+  // },[loginUser])
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormState({
@@ -53,6 +61,8 @@ export default function SignInSide() {
         variables: { ...formState },
       });
       Auth.login(data.login.token);
+      //navigate("/home")
+      setloginUser(true)
     } catch (e) {
       console.error(e);
     }
@@ -61,6 +71,10 @@ export default function SignInSide() {
       password: '',
     });
   };
+  // if(loginUser){
+  //   console.log("we are in!!!!!!!")
+  //   return navigate("/home")
+  // }
 
   return (
     <ThemeProvider theme={defaultTheme}>

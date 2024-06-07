@@ -44,7 +44,7 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <ThemeProvider theme={defaultTheme}>
-    <CssBaseline />
+    {/* <CssBaseline /> */}
     <RouterProvider router={router} />
   </ThemeProvider>
 );

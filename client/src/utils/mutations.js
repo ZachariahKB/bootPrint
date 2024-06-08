@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client';
 
-//the loging functionality
+// the login functionality
 export const LOGIN_USER = gql`
   mutation login($email: String!, $password: String!) {
     login(email: $email, password: $password) {
@@ -12,6 +12,7 @@ export const LOGIN_USER = gql`
     }
   }
 `;
+
 // the sign up of a new user
 export const ADD_USER = gql`
   mutation addUser($username: String!, $email: String!, $password: String!) {
@@ -24,20 +25,21 @@ export const ADD_USER = gql`
     }
   }
 `;
-//adding a new project. providing title githubRepo, a project description and contact info
-export const ADD_PROJECT = gql`
-mutation AddProject($title: String!, $description: String!, $githubRepo: String!, $contactInfo: String!) {
-  addProject(title: $title, description: $description, githubRepo: $githubRepo, contactInfo: $contactInfo) {
-    title
-    githubRepo
-    description
-    contactInfo
-  }
-}
-`
 
- // adding a resource to the application by providing the topic and content
- export const ADD_RESOURCE =gql`
+// adding a new project, providing title, GitHub repo, a project description, and contact info
+export const ADD_PROJECT = gql`
+  mutation AddProject($title: String!, $description: String!, $githubRepo: String!, $contactInfo: String!) {
+    addProject(title: $title, description: $description, githubRepo: $githubRepo, contactInfo: $contactInfo) {
+      title
+      githubRepo
+      description
+      contactInfo
+    }
+  }
+`;
+
+// adding a resource to the application by providing the topic and content
+export const ADD_RESOURCE = gql`
   mutation AddResource($topic: String!, $content: String!) {
     addResource(topic: $topic, content: $content) {
       topic
@@ -45,10 +47,10 @@ mutation AddProject($title: String!, $description: String!, $githubRepo: String!
       createdAt
     }
   }
- `;
+`;
 
- //adding a comment to a single project
- export const ADD_COMMENT = gql`
+// adding a comment to a single project
+export const ADD_COMMENT = gql`
   mutation AddComment($projectId: ID!, $commentText: String!) {
     addComment(projectId: $projectId, commentText: $commentText) {
       comments {
@@ -58,9 +60,53 @@ mutation AddProject($title: String!, $description: String!, $githubRepo: String!
       }
     }
   }
- `;
- //removing one resource using the resourceId
- export const REMOVE_RESOURCE = gql`
+`;
+
+// updating a comment on a single project
+export const UPDATE_COMMENT = gql`
+  mutation UpdateComment($projectId: ID!, $commentId: ID!, $commentText: String!) {
+    updateComment(projectId: $projectId, commentId: $commentId, commentText: $commentText) {
+      comments {
+        _id
+        commentText
+        commentAuthor
+        createdAt
+      }
+    }
+  }
+`;
+
+// updating a user's profile
+export const UPDATE_USER = gql`
+  mutation UpdateUser($userId: ID!, $username: String, $email: String, $password: String, $jobStatus: String, $linkedin: String, $gitHub: String) {
+    updateUser(userId: $userId, username: $username, email: $email, password: $password, jobStatus: $jobStatus, linkedin: $linkedin, gitHub: $gitHub) {
+      _id
+      username
+      email
+      jobStatus
+      linkedin
+      gitHub
+    }
+  }
+`;
+
+// updating a project's details
+export const UPDATE_PROJECT = gql`
+  mutation UpdateProject($projectId: ID!, $title: String!, $description: String!, $githubRepo: String!, $contactInfo: String!) {
+    updateProject(projectId: $projectId, title: $title, description: $description, githubRepo: $githubRepo, contactInfo: $contactInfo) {
+      _id
+      title
+      description
+      githubRepo
+      contactInfo
+    }
+  }
+`;
+
+
+
+// removing one resource using the resourceId
+export const REMOVE_RESOURCE = gql`
   mutation RemoveResource($resourcesId: ID!) {
     removeResource(resourcesId: $resourcesId) {
       content
@@ -68,10 +114,10 @@ mutation AddProject($title: String!, $description: String!, $githubRepo: String!
       topic
     }
   }
- `;
+`;
 
-//removing a comment from the project
-export const REMOVE_COMMENT =gql`
+// removing a comment from the project
+export const REMOVE_COMMENT = gql`
   mutation RemoveComment($projectId: ID!, $commentId: ID!) {
     removeComment(projectId: $projectId, commentId: $commentId) {
       comments {
@@ -82,15 +128,15 @@ export const REMOVE_COMMENT =gql`
   }
 `;
 
- //removing the project
+// removing the project
 export const REMOVE_PROJECT = gql`
-mutation RemoveProject($projectId: ID!) {
-  removeProject(projectId: $projectId) {
-    title
-    description
-    githubRepo
+  mutation RemoveProject($projectId: ID!) {
+    removeProject(projectId: $projectId) {
+      title
+      description
+      githubRepo
+    }
   }
-}
 `;
 
 
@@ -98,20 +144,4 @@ mutation RemoveProject($projectId: ID!) {
 
 
 
-//TODO: Do we need this?
 
-// export const ADD_COMMENT = gql`
-//   mutation addComment($thoughtId: ID!, $commentText: String!) {
-//     addComment(thoughtId: $thoughtId, commentText: $commentText) {
-//       _id
-//       thoughtText
-//       thoughtAuthor
-//       createdAt
-//       comments {
-//         _id
-//         commentText
-//         createdAt
-//       }
-//     }
-//   }
-// `;

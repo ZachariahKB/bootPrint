@@ -1,38 +1,27 @@
 import { Navigate, useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
-
-import ProjectForm from '../components/ProjectForm';
 import ProjectList from '../components/ProjectList';
-
 import { QUERY_USER, QUERY_ME } from '../utils/queries';
 
-import Auth from '../utils/auth';
 
 const Profile = () => {
-  const { username } = useParams(); 
-  console.log("hello")
-  
-  console.log('username',username)
+  const { username } = useParams();
 
-  // console.log("goodbye")
-
-  // const { loading, data } = useQuery(username ? QUERY_USER : QUERY_ME, {
-  //   variables: { username: username },
-  // });
-  const { loading, data } = useQuery( QUERY_USER , {
-    variables: { username: username },
+  // Use QUERY_ME if no username is provided in URL
+  const { loading, data } = useQuery(username ? QUERY_USER : QUERY_ME, {
+    variables: { username },
   });
-  console.log(data)
-  const user = data?.user || {};
-  // navigate to personal profile page if username is yours
-  // if (Auth.loggedIn() && Auth.getProfile().data.username === username) {
-  //   return <Navigate to="/me" />;
-  // }
 
+  // Get the user data from the query result
+  const user = data?.me || data?.user || {};
+
+
+  // Handle loading state
   if (loading) {
     return <div>Loading...</div>;
   }
 
+  // Show message if no user is found
   if (!user?.username) {
     return (
       <h4>
@@ -46,33 +35,19 @@ const Profile = () => {
     <div>
       <div className="flex-row justify-center mb-3">
         <h2 className="col-12 col-md-10 bg-dark text-light p-3 mb-5">
-          Viewing {username ? `${username}'s` : 'your'} profile.
+          Viewing {username ? `${user.username}'s` : 'your'} profile.
         </h2>
-        {/* Problem with being able to see a profile even if logged out */}
         <div className="col-12 col-md-10 mb-5">
-          {/* <ProjectList
-            projects={user.projects}
-            title={`${user.username}'s projects...`}
-            showTitle={false}
-            showUsername={false}
-          /> */}
-        </div>
-        {!username && (
-          <div
-            className="col-12 col-md-10 mb-3 p-3"
-            style={{ border: '1px dotted #1a1a1a' }}
-          >
-            <ProjectList 
+          <ProjectList
             projects={user.projects}
             title={`${user.username}'s projects...`}
             showTitle={true}
             showUsername={false}
-            showComment={false}
-            />
-          </div>
-        )}
+            showComment={false}  // Ensure comments are not shown for own profile
+          />
+        </div>
       </div>
-      </div>
+    </div>
   );
 };
 

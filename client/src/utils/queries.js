@@ -53,6 +53,12 @@ query Project($projectId: ID!) {
     description
     title
     projectAuthor
+    comments{
+    commentText
+    commentAuthor
+    createdAt
+    _id
+    }
   }
 }
 `;

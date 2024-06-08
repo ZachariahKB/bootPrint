@@ -1,7 +1,11 @@
-import { Link } from 'react-router-dom';
+import React from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import Auth from '../../utils/auth';
 
 const Header = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const logout = (event) => {
     event.preventDefault();
     Auth.logout();
@@ -16,6 +20,16 @@ const Header = () => {
           </Link>
           <p className="m-0">These Boots Are Made For Coding!</p>
         </div>
+        <div>
+          {location.pathname !== '/' && (
+            <button
+              className="btn btn-secondary"
+              onClick={() => navigate(-1)}
+            >
+              &larr; Go Back
+            </button>
+          )}
+        </div>
         {Auth.loggedIn() && (
           <nav>
             <ul className="nav">
@@ -26,13 +40,7 @@ const Header = () => {
               </li>
               <li className="nav-item">
                 <Link className="nav-link text-light" to="/home">
-                  My Recources
-                </Link>
-              </li>
-              {/*  */}
-              <li className="nav-item">
-                <Link className="nav-link text-light" to="/">
-                  
+                  My Resources
                 </Link>
               </li>
               {/* Add more nav links as needed */}
@@ -41,14 +49,9 @@ const Header = () => {
         )}
         <div>
           {Auth.loggedIn() ? (
-            <>
-              {/* <Link className="btn btn-lg btn-info m-2" to={`/profiles/${Auth.getProfile().data.username}`}>
-                {Auth.getProfile().data.username}'s profile
-              </Link> */}
-              <button className="btn btn-lg btn-light m-2" onClick={logout}>
-                Logout
-              </button>
-            </>
+            <button className="btn btn-lg btn-light m-2" onClick={logout}>
+              Logout
+            </button>
           ) : (
             <p className="m-0"></p>
           )}

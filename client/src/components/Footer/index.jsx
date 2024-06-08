@@ -1,5 +1,4 @@
 import React from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 const FooterContainer = styled.footer`
@@ -12,19 +11,6 @@ const FooterContainer = styled.footer`
 `;
 
 const FooterContent = styled.div`
-  .btn-back {
-    background-color: #343a40;
-    color: white;
-    border: none;
-    margin-bottom: 20px;
-    cursor: pointer;
-    padding: 10px 20px;
-    border-radius: 5px;
-    &:hover {
-      background-color: #495057;
-    }
-  }
-
   .emoji {
     margin-left: 5px;
     margin-right: 5px;
@@ -51,20 +37,10 @@ const teamMembers = [
 ];
 
 const Footer = () => {
-  const location = useLocation();
-  const navigate = useNavigate();
-
   return (
     <FooterContainer>
       <FooterContent>
-        {location.pathname !== '/' && (
-          <button
-            className="btn-back"
-            onClick={() => navigate(-1)}
-          >
-            &larr; Go Back
-          </button>
-        )}Check use out at our GitHubs!
+        Check us out at our GitHubs!
         <GitHubLinks>
           {teamMembers.map(member => (
             <a key={member.name} href={member.github} target="_blank" rel="noopener noreferrer">

@@ -31,6 +31,7 @@ export const QUERY_ALL_USER =gql`
 export const QUERY_PROJECTS= gql`
 query Projects {
   projects {
+    _id
     title
     description
     githubRepo

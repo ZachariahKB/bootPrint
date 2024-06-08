@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
-
+import { useMutation } from '@apollo/client';
+import { REMOVE_PROJECT } from "../../utils/mutations"
+import { QUERY_PROJECTS } from "../../utils/queries"
 const ProjectList = ({
   projects,
   title,
@@ -9,6 +11,13 @@ const ProjectList = ({
 }) => {
   if (!projects.length) {
     return <h3>No Projects Yet</h3>;
+  }
+  const [ RemoveProject ] = useMutation(REMOVE_PROJECT, {
+    refetchQueries: [QUERY_PROJECTS]
+  })
+  async function handleDelete(project_id){
+    await RemoveProject({variables: {projectId: project_id}})
+    window.location.reload()
   }
 
   return (
@@ -24,6 +33,7 @@ const ProjectList = ({
                     <div> Project Title:
                   {project.title}
                 </div>
+                <button className='deleteButton' onClick={() => handleDelete(project._id)}>Delete</button>
                 <Link
                   className="text-light"
                   to={`/profiles/${project.projectAuthor}`}
@@ -37,8 +47,10 @@ const ProjectList = ({
               ) : (
                 <>
                 {/* Profile */}
+                <button className='deleteButton' onClick={() => handleDelete(project._id)}>Delete</button>
                   <div> Project Title:
                   {project.title}
+                  
                   <div>
                   {project.githubRepo}
                   </div>

@@ -9,6 +9,7 @@ query user($username: String) {
       jobStatus
       linkedin
       projects {
+      _id
         title
         githubRepo
         description

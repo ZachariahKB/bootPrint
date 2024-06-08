@@ -7,7 +7,7 @@ const typeDefs = `
     jobStatus: String
     linkedin: String
     gitHub: String
-  projects: [Project]!
+    projects: [Project]!
   }
 
   type Project {
@@ -20,6 +20,7 @@ const typeDefs = `
     projectAuthor: String
     comments: [Comment]!
   }
+
   type Resources {
     _id: ID
     topic: String
@@ -32,7 +33,7 @@ const typeDefs = `
     commentText: String
     commentAuthor: String
     createdAt: String
- }
+  }
 
   type Auth {
     token: ID!
@@ -44,19 +45,21 @@ const typeDefs = `
     user(username: String): User
     projects(username: String): [Project]
     project(projectId: ID!): Project
-    resources(username:String, topic: String):[Resources]
+    resources(username: String, topic: String): [Resources]
     me: User
   }
 
   type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
-    addProject(description: String!, title: String!, githubRepo: String!, contactInfo:String! ): Project
-    addResource(topic: String!, content: String!):Resources
+    addProject(description: String!, title: String!, githubRepo: String!, contactInfo: String!): Project
+    addResource(topic: String!, content: String!): Resources
     addComment(projectId: ID!, commentText: String!): Project
     removeProject(projectId: ID!): Project
     removeResource(resourcesId: ID!): Resources
     removeComment(projectId: ID!, commentId: ID!): Project
+    updateComment(projectId: ID!, commentId: ID!, commentText: String!): Project
+    updateProfile(userId: ID!, username: String, email: String, password: String, jobStatus: String, linkedin: String, gitHub: String): User
   }
 `;
 

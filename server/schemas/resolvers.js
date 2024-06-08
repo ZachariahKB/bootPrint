@@ -3,70 +3,68 @@ const { signToken, AuthenticationError } = require('../utils/auth');
 
 const resolvers = {
   Query: {
-    //find all the users with the projects they have
+    // Find all users with their projects
     users: async () => {
       return User.find().populate('projects');
     },
-    // finding one user and the projects
+    // Find a single user and their projects
     user: async (parent, { username }, context) => {
-      console.log("we made it",username);
       if (context.user) {
-        if( username ){
-        return User.findOne({ username }).populate('projects');
+        if (username) {
+          return User.findOne({ username }).populate('projects');
+        }
+        return User.findOne({ _id: context.user._id }).populate('projects');
       }
-      return User.findOne({ _id: context.user._id }).populate('projects');
-    }
-      throw AuthenticationError;
+      throw new AuthenticationError('You need to be logged in!');
     },
-    // get all the projects
+    // Get all projects
     projects: async (parent, { username }) => {
       const params = username ? { username } : {};
       return Project.find(params).sort({ createdAt: -1 });
     },
-    //get a single project
-    project: async( parent, { projectId }) => {
-      return Project.findOne({_id:  projectId})
+    // Get a single project
+    project: async (parent, { projectId }) => {
+      return Project.findOne({ _id: projectId });
     },
-    // get the resources
-    resources: async (parent, { topic })=>{
-      const params = topic ? {  topic}: {};
-      return Resources.find(params).sort({createdAt: -1 });
+    // Get all resources
+    resources: async (parent, { topic }) => {
+      const params = topic ? { topic } : {};
+      return Resources.find(params).sort({ createdAt: -1 });
     },
-
+    // Get the logged-in user's data
     me: async (parent, args, context) => {
       if (context.user) {
         return User.findOne({ _id: context.user._id }).populate('projects');
       }
-      throw AuthenticationError;
+      throw new AuthenticationError('You need to be logged in!');
     },
   },
 
   Mutation: {
-    //adding a new user
+    // Add a new user
     addUser: async (parent, { username, email, password }) => {
       const user = await User.create({ username, email, password });
       const token = signToken(user);
       return { token, user };
     },
-    //loging in to the application
+    // Log in to the application
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
 
       if (!user) {
-        throw AuthenticationError;
+        throw new AuthenticationError('Invalid credentials');
       }
 
       const correctPw = await user.isCorrectPassword(password);
 
       if (!correctPw) {
-        throw AuthenticationError;
+        throw new AuthenticationError('Invalid credentials');
       }
 
       const token = signToken(user);
-
       return { token, user };
     },
-    //adding a project 
+    // Add a project
     addProject: async (parent, { description, title, githubRepo, contactInfo }, context) => {
       if (context.user) {
         const project = await Project.create({
@@ -84,10 +82,9 @@ const resolvers = {
 
         return project;
       }
-      throw AuthenticationError;
-      ('You need to be logged in!');
+      throw new AuthenticationError('You need to be logged in!');
     },
-    //adding resources 
+    // Add resources
     addResource: async (parent, { topic, content }, context) => {
       if (context.user) {
         const resources = await Resources.create({
@@ -103,10 +100,9 @@ const resolvers = {
 
         return resources;
       }
-      throw AuthenticationError;
-      ('You need to be logged in!');
+      throw new AuthenticationError('You need to be logged in!');
     },
-    //adding a comment to the project
+    // Add a comment to a project
     addComment: async (parent, { projectId, commentText }, context) => {
       if (context.user) {
         return Project.findOneAndUpdate(
@@ -122,9 +118,37 @@ const resolvers = {
           }
         );
       }
-      throw AuthenticationError;
+      throw new AuthenticationError('You need to be logged in!');
     },
-    //removing a project you created from you application
+    // Update a comment on a project
+    updateComment: async (parent, { projectId, commentId, commentText }, context) => {
+      if (context.user) {
+        return Project.findOneAndUpdate(
+          { _id: projectId, "comments._id": commentId, "comments.commentAuthor": context.user.username },
+          {
+            $set: { "comments.$.commentText": commentText },
+          },
+          {
+            new: true,
+            runValidators: true,
+          }
+        );
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
+    // Update a user profile
+    updateProfile: async (parent, { userId, username, email, password, jobStatus, linkedin, gitHub }, context) => {
+      if (context.user && context.user._id === userId) {
+        const updatedUser = await User.findByIdAndUpdate(
+          userId,
+          { username, email, password, jobStatus, linkedin, gitHub },
+          { new: true, runValidators: true }
+        );
+        return updatedUser;
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
+    // Remove a project
     removeProject: async (parent, { projectId }, context) => {
       if (context.user) {
         const project = await Project.findOneAndDelete({
@@ -134,24 +158,19 @@ const resolvers = {
 
         await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $pull: { project: project._id } }
+          { $pull: { projects: project._id } }
         );
 
         return project;
       }
-      throw AuthenticationError;
+      throw new AuthenticationError('You need to be logged in!');
     },
-    //remove a resource 
+    // Remove a resource
     removeResource: async (parent, { resourcesId }, context) => {
       if (context.user) {
-        console.log(resourcesId)
-        console.log(context.user.username)
         const resources = await Resources.findOneAndDelete({
-
           _id: resourcesId,
-          // resourcesAuthor: context.user.username,
         });
-        console.log(resources)
 
         await User.findOneAndUpdate(
           { _id: context.user._id },
@@ -160,9 +179,9 @@ const resolvers = {
 
         return resources;
       }
-      throw AuthenticationError;
+      throw new AuthenticationError('You need to be logged in!');
     },
-    // removing a comment
+    // Remove a comment from a project
     removeComment: async (parent, { projectId, commentId }, context) => {
       if (context.user) {
         return Project.findOneAndUpdate(
@@ -178,7 +197,7 @@ const resolvers = {
           { new: true }
         );
       }
-      throw AuthenticationError;
+      throw new AuthenticationError('You need to be logged in!');
     },
   },
 };

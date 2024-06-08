@@ -33,7 +33,6 @@ const ProjectList = ({
                     <div> Project Title:
                   {project.title}
                 </div>
-                <button className='deleteButton' onClick={() => handleDelete(project._id)}>Delete</button>
                 <Link
                   className="text-light"
                   to={`/profiles/${project.projectAuthor}`}

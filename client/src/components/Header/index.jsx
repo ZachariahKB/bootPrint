@@ -59,75 +59,71 @@ const Header = () => {
           </Link>
           <p className="m-0">These Boots Are Made For Coding!</p>
         </div>
-        <div>
+        <div className="flex-row align-center">
           {location.pathname !== '/' && (
-            <button
-              className="btn btn-secondary"
+            <Button
+              variant="contained"
+              color="secondary"
               onClick={() => navigate(-1)}
+              style={{ marginRight: '10px' }}
             >
               &larr; Go Back
-            </button>
+            </Button>
+          )}
+          {Auth.loggedIn() && (
+            <div>
+              <Button
+                ref={anchorRef}
+                id="composition-button"
+                aria-controls={open ? 'composition-menu' : undefined}
+                aria-expanded={open ? 'true' : undefined}
+                aria-haspopup="true"
+                onClick={handleToggle}
+                variant="contained"
+                color="primary"
+              >
+                Dashboard
+              </Button>
+              <Popper
+                open={open}
+                anchorEl={anchorRef.current}
+                role={undefined}
+                placement="bottom-start"
+                transition
+                disablePortal
+                style={{ zIndex: 1 }}
+              >
+                {({ TransitionProps, placement }) => (
+                  <Grow
+                    {...TransitionProps}
+                    style={{
+                      transformOrigin: placement === 'bottom-start' ? 'left top' : 'left bottom',
+                    }}
+                  >
+                    <Paper>
+                      <ClickAwayListener onClickAway={handleClose}>
+                        <MenuList
+                          autoFocusItem={open}
+                          id="composition-menu"
+                          aria-labelledby="composition-button"
+                          onKeyDown={handleListKeyDown}
+                        >
+                          <MenuItem onClick={handleClose}>
+                            <Link to="/profile">Profile</Link>
+                          </MenuItem>
+                          <MenuItem onClick={handleClose}>
+                            <Link to="/My Resources">My Resources</Link>
+                          </MenuItem>
+                          <MenuItem onClick={logout}>Logout</MenuItem>
+                        </MenuList>
+                      </ClickAwayListener>
+                    </Paper>
+                  </Grow>
+                )}
+              </Popper>
+            </div>
           )}
         </div>
-        {Auth.loggedIn() && (
-          <Stack direction="row" spacing={2}>
-            <Button
-              ref={anchorRef}
-              id="composition-button"
-              aria-controls={open ? 'composition-menu' : undefined}
-              aria-expanded={open ? 'true' : undefined}
-              aria-haspopup="true"
-              onClick={handleToggle}
-            >
-              Dashboard
-            </Button>
-            <Popper
-              open={open}
-              anchorEl={anchorRef.current}
-              role={undefined}
-              placement="bottom-start"
-              transition
-              disablePortal
-              style={{
-                zIndex: 1
-              }}
-            >
-              {({ TransitionProps, placement }) => (
-                <Grow
-                  {...TransitionProps}
-                  style={{
-                    transformOrigin: placement === 'bottom-start' ? 'left top' : 'left bottom',
-                    
-                  }}
-                
-                >
-                  
-                  
-                
-                  <Paper>
-                    
-                    <ClickAwayListener onClickAway={handleClose}>
-                      <MenuList
-                        autoFocusItem={open}
-                        id="composition-menu"
-                        aria-labelledby="composition-button"
-                        onKeyDown={handleListKeyDown}
-                      >
-                        <MenuItem onClick={handleClose}>
-                          <Link to="/profile">Profile</Link>
-                        </MenuItem>
-                        <MenuItem onClick={handleClose}>
-                          <Link to="/My Resources">My Resources</Link>
-                        </MenuItem>
-                        <MenuItem onClick={logout}>Logout</MenuItem>
-                      </MenuList>
-                    </ClickAwayListener>
-                  </Paper>
-                </Grow>
-              )}
-            </Popper>
-          </Stack>
-        )}
       </div>
     </header>
   );

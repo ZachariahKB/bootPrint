@@ -1,8 +1,7 @@
-import { Navigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import ProjectList from '../components/ProjectList';
 import { QUERY_USER, QUERY_ME } from '../utils/queries';
-
 
 const Profile = () => {
   const { username } = useParams();
@@ -14,7 +13,6 @@ const Profile = () => {
 
   // Get the user data from the query result
   const user = data?.me || data?.user || {};
-
 
   // Handle loading state
   if (loading) {
@@ -42,8 +40,8 @@ const Profile = () => {
             projects={user.projects}
             title={`${user.username}'s projects...`}
             showTitle={true}
-            showUsername={false}
-            showComment={false}  // Ensure comments are not shown for own profile
+            showUsername={!username}  // Only show username if viewing other profiles
+            showComment={false}  // Show comments for all profiles
           />
         </div>
       </div>

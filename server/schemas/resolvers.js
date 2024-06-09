@@ -136,6 +136,22 @@ const resolvers = {
       }
       throw new AuthenticationError('You need to be logged in!');
     },
+    //Update Project
+    updateProject: async (parent, { projectId, description, title, githubRepo, contactInfo, projectAuthor }, context) => {
+      if (context.user) {
+        return Project.findOneAndUpdate(
+          { _id: projectId},
+          {
+            $set: { description, title, githubRepo, contactInfo, projectAuthor} ,
+          },
+          {
+            new: true,
+            runValidators: true,
+          }
+        );
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
     // Update a user profile
     updateProfile: async (parent, { userId, username, email, password, jobStatus, linkedin, gitHub }, context) => {
       if (context.user && context.user._id === userId) {

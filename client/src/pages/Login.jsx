@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link as RouterLink, useNavigate, redirect } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../utils/mutations';
@@ -22,7 +22,7 @@ function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
-      <Link color="inherit" href="https://project-3-il5t.onrender.com/">
+      <Link color="inherit" href="https://github.com/ZachariahKB/project-3" target="_blank">
          {/* Add a link to website here */}
         BootPrint
       </Link>{' '}

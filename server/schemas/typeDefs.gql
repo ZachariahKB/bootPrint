@@ -60,6 +60,7 @@ const typeDefs = `
     removeComment(projectId: ID!, commentId: ID!): Project
     updateComment(projectId: ID!, commentId: ID!, commentText: String!): Project
     updateProfile(userId: ID!, username: String, email: String, password: String, jobStatus: String, linkedin: String, gitHub: String): User
+    updateProject(projectId: ID!, description: String, title: String, githubRepo: String, contactInfo: String, projectAuthor: String): Project  
   }
 `;
 

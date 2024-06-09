@@ -88,15 +88,24 @@ const Header = () => {
               placement="bottom-start"
               transition
               disablePortal
+              style={{
+                zIndex: 1
+              }}
             >
               {({ TransitionProps, placement }) => (
                 <Grow
                   {...TransitionProps}
                   style={{
                     transformOrigin: placement === 'bottom-start' ? 'left top' : 'left bottom',
+                    
                   }}
+                
                 >
+                  
+                  
+                
                   <Paper>
+                    
                     <ClickAwayListener onClickAway={handleClose}>
                       <MenuList
                         autoFocusItem={open}

@@ -1,5 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
+import { useState, useEffect } from 'react';
 import ProjectList from '../components/ProjectList';
 import { QUERY_USER, QUERY_ME } from '../utils/queries';
 
@@ -13,6 +14,23 @@ const Profile = () => {
 
   // Get the user data from the query result
   const user = data?.me || data?.user || {};
+
+  // State for projects
+  const [projects, setProjects] = useState(user.projects || []);
+
+  useEffect(() => {
+    if (user.projects) {
+      setProjects(user.projects);
+    }
+  }, [user.projects]);
+
+  const updateProject = (updatedProject) => {
+    setProjects(prevProjects =>
+      prevProjects.map(project =>
+        project._id === updatedProject._id ? updatedProject : project
+      )
+    );
+  };
 
   // Handle loading state
   if (loading) {
@@ -37,11 +55,13 @@ const Profile = () => {
         </h2>
         <div className="col-12 col-md-10 mb-5">
           <ProjectList
-            projects={user.projects}
+            projects={projects}
             title={`${user.username}'s projects...`}
             showTitle={true}
             showUsername={!username}  // Only show username if viewing other profiles
-            showComment={false}  // Show comments for all profiles
+            showComment={true}  // Show comments for all profiles
+            updateProject={updateProject}  // Pass the function to update a project
+            currentUser={user.username}  // Pass the current logged-in user's username
           />
         </div>
       </div>

@@ -16,7 +16,7 @@ const CommentForm = ({ projectId }) => {
     event.preventDefault();
 
     try {
-      const { data } = await addComment({
+       await addComment({
         variables: {
           projectId,
           commentText
@@ -24,7 +24,6 @@ const CommentForm = ({ projectId }) => {
       });
 
       setCommentText('');
-      window.location.reload();
     } catch (err) {
       console.error(err);
     }

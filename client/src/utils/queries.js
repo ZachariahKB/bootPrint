@@ -15,6 +15,12 @@ query user($username: String) {
         description
         createdAt
         contactInfo
+        comments {
+          _id
+          commentAuthor
+          commentText
+          createdAt
+      }
       }
     }
 }
@@ -75,6 +81,12 @@ export const QUERY_ME = gql`
         description
         projectAuthor
         createdAt
+        comments {
+          _id
+          commentAuthor
+          commentText
+          createdAt
+      }
       }
     }
   }

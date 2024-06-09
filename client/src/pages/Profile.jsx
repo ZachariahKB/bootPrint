@@ -8,7 +8,7 @@ const Profile = () => {
   const { username } = useParams();
 
   // Use QUERY_ME if no username is provided in URL
-  const { loading, data, refetch } = useQuery(username ? QUERY_USER : QUERY_ME, {
+  const { loading, data} = useQuery(username ? QUERY_USER : QUERY_ME, {
     variables: { username },
   });
 
@@ -31,7 +31,7 @@ const Profile = () => {
       )
     );
   };
-
+  
   // Handle loading state
   if (loading) {
     return <div>Loading...</div>;

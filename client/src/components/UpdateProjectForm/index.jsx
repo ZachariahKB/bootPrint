@@ -1,6 +1,9 @@
 import { useState } from 'react';
 import { useMutation } from '@apollo/client';
-import { UPDATE_PROJECT } from '../../utils/mutations';
+import { UPDATE_PROJECT} from '../../utils/mutations';
+import { QUERY_PROJECTS} from '../../utils/queries';
+// import ProjectForm from '../ProjectForm'; TODO: Check to see if we still need this
+
 
 const UpdateProjectForm = ({ project, updateProject }) => {
   const [title, setTitle] = useState(project.title);
@@ -8,7 +11,27 @@ const UpdateProjectForm = ({ project, updateProject }) => {
   const [githubRepo, setGithubRepo] = useState(project.githubRepo);
   const [contactInfo, setContactInfo] = useState(project.contactInfo);
 
-  const [updateProjectMutation] = useMutation(UPDATE_PROJECT);
+  const [updateProjectMutation] = useMutation(UPDATE_PROJECT, {update(cache, { data: { updateProject } }) {
+    cache.modify({
+      feilds: {
+        me(existingMeRef= {}){
+          const updatedProjectRef= cache.writeFragment({
+            data: updateProject,
+            fragment: gql`
+            _id
+            title 
+            description
+            githubRepo
+            contactInfo` 
+          })
+          return {
+            ...existingMeRef, 
+            projects: existingMeRef.projects.map((project)=> project._id === updateProject._id ? updatedProjectRef: project)
+          }
+        }
+      }
+    })
+  }});
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -22,6 +45,7 @@ const UpdateProjectForm = ({ project, updateProject }) => {
           githubRepo,
           contactInfo,
         },
+        refetchQueries: [QUERY_PROJECTS],
       });
 
       updateProject(data.updateProject); // Update projects state in Profile

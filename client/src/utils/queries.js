@@ -78,7 +78,10 @@ export const QUERY_ME = gql`
       email
       projects {
         _id
+        title
         description
+        githubRepo
+        contactInfo
         projectAuthor
         createdAt
         comments {

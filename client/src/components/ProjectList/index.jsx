@@ -24,9 +24,27 @@ const ProjectList = ({
       [projectId]: !prev[projectId],
     }));
   };
-
+  
   const [RemoveProject] = useMutation(REMOVE_PROJECT, {
-    refetchQueries: [QUERY_PROJECTS],
+    update(cache, {data: {removeProject}}) {
+      cache.modify({
+        fields: {
+          projects(existingProject = [], {readField}){
+            return existingProject.filter((project) => readField("_id", project) !== removeProject._id)
+          }
+        }
+      })
+      cache.modify({
+        fields: {
+          me(existingMeRef= {}){
+            return {
+              ...existingMeRef, 
+              projects: existingMeRef.projects.filter((project)=>  readField("_id", project) !== removeProject._id)
+            }
+          }
+        }
+      })
+    }
   });
 
   async function handleDelete(projectId) {

@@ -1,6 +1,6 @@
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
-import { useState, useEffect } from 'react';
 import ProjectList from '../components/ProjectList';
 import { QUERY_USER, QUERY_ME } from '../utils/queries';
 
@@ -8,7 +8,7 @@ const Profile = () => {
   const { username } = useParams();
 
   // Use QUERY_ME if no username is provided in URL
-  const { loading, data } = useQuery(username ? QUERY_USER : QUERY_ME, {
+  const { loading, data, refetch } = useQuery(username ? QUERY_USER : QUERY_ME, {
     variables: { username },
   });
 
@@ -16,7 +16,7 @@ const Profile = () => {
   const user = data?.me || data?.user || {};
 
   // State for projects
-  const [projects, setProjects] = useState(user.projects || []);
+  const [projects, setProjects] = useState([]);
 
   useEffect(() => {
     if (user.projects) {
@@ -25,8 +25,8 @@ const Profile = () => {
   }, [user.projects]);
 
   const updateProject = (updatedProject) => {
-    setProjects(prevProjects =>
-      prevProjects.map(project =>
+    setProjects((prevProjects) =>
+      prevProjects.map((project) =>
         project._id === updatedProject._id ? updatedProject : project
       )
     );

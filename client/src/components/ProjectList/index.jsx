@@ -18,7 +18,7 @@ const ProjectList = ({
 }) => {
   const [showUpdateForm, setShowUpdateForm] = useState({});
 
-  const   toggleUpdateForm = (projectId) => {
+  const toggleUpdateForm = (projectId) => {
     setShowUpdateForm((prev) => ({
       ...prev,
       [projectId]: !prev[projectId],
@@ -64,12 +64,14 @@ const ProjectList = ({
                     className="btn btn-secondary"
                     onClick={() => toggleUpdateForm(project._id)}
                   >
-                    {showUpdateForm[project._id] ? 'Cancel' : 'Update Project '}
+                    {showUpdateForm[project._id] ? 'Cancel' : 'Update Project'}
                   </button>
                   {showUpdateForm[project._id] && (
                     <UpdateProjectForm project={project} updateProject={updateProject} />
                   )}
-                  <button className="deleteButton" onClick={() => handleDelete(project._id)}>Delete</button>
+                  <button className="btn btn-danger" onClick={() => handleDelete(project._id)}>
+                    Delete
+                  </button>
                 </>
               )}
             </div>

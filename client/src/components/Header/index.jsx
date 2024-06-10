@@ -9,6 +9,7 @@ import Popper from '@mui/material/Popper';
 import MenuItem from '@mui/material/MenuItem';
 import MenuList from '@mui/material/MenuList';
 import Stack from '@mui/material/Stack';
+import './header.css'; // Ensure this path is correct
 
 const Header = () => {
   const [open, setOpen] = useState(false);
@@ -59,19 +60,9 @@ const Header = () => {
           </Link>
           <p className="m-0">These Boots Are Made For Coding!</p>
         </div>
-        <div className="flex-row align-center">
-          {location.pathname !== '/' && (
-            <Button
-              variant="contained"
-              color="secondary"
-              onClick={() => navigate(-1)}
-              style={{ marginRight: '10px' }}
-            >
-              &larr; Go Back
-            </Button>
-          )}
+        <div className="flex-row align-center button-group">
           {Auth.loggedIn() && (
-            <div>
+            <>
               <Button
                 ref={anchorRef}
                 id="composition-button"
@@ -81,9 +72,20 @@ const Header = () => {
                 onClick={handleToggle}
                 variant="contained"
                 color="primary"
+                className="dashboard-button"  // Apply class
               >
                 Dashboard
               </Button>
+              {location.pathname !== '/' && (
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  onClick={() => navigate(-1)}
+                  className="button-spacing"  // Apply class
+                >
+                  &larr; Go Back
+                </Button>
+              )}
               <Popper
                 open={open}
                 anchorEl={anchorRef.current}
@@ -121,7 +123,7 @@ const Header = () => {
                   </Grow>
                 )}
               </Popper>
-            </div>
+            </>
           )}
         </div>
       </div>

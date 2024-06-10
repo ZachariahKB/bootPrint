@@ -7,7 +7,7 @@ const typeDefs = `
     jobStatus: String
     linkedin: String
     gitHub: String
-  projects: [Project]!
+    projects: [Project]!
   }
 
   type Project {
@@ -16,20 +16,24 @@ const typeDefs = `
     title: String
     githubRepo: String
     contactInfo: String
-    # comments: [Comment]!
+    createdAt: String
+    projectAuthor: String
+    comments: [Comment]!
   }
+
   type Resources {
     _id: ID
     topic: String
     content: String  
+    createdAt: String
   }
 
-  #type Comment {
-    #_id: ID
-    #commentText: String
-    #commentAuthor: String
-    #createdAt: String
- #}
+  type Comment {
+    _id: ID
+    commentText: String
+    commentAuthor: String
+    createdAt: String
+  }
 
   type Auth {
     token: ID!
@@ -38,19 +42,25 @@ const typeDefs = `
 
   type Query {
     users: [User]
-    user(username: String!): User
+    user(username: String): User
     projects(username: String): [Project]
-    resources(username:String):[Resources]
+    project(projectId: ID!): Project
+    resources(username: String, topic: String): [Resources]
     me: User
   }
 
   type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
-    addProject(description: String!, title: String!, githubRepo: String!, contactInfo:String! ): Project
+    addProject(description: String!, title: String!, githubRepo: String!, contactInfo: String!): Project
+    addResource(topic: String!, content: String!): Resources
+    addComment(projectId: ID!, commentText: String!): Project
     removeProject(projectId: ID!): Project
-    addResource(topic: String!, content:String!):Resources
-    removeResource(resourceId:ID!): Resources
+    removeResource(resourcesId: ID!): Resources
+    removeComment(projectId: ID!, commentId: ID!): Project
+    updateComment(projectId: ID!, commentId: ID!, commentText: String!): Project
+    updateProfile(userId: ID!, username: String, email: String, password: String, jobStatus: String, linkedin: String, gitHub: String): User
+    updateProject(projectId: ID!, description: String, title: String, githubRepo: String, contactInfo: String, projectAuthor: String): Project  
   }
 `;
 

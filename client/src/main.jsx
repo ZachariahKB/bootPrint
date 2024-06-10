@@ -1,12 +1,12 @@
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { ThemeProvider, createTheme, CssBaseline } from '@mui/material';
+import { ThemeProvider, createTheme } from '@mui/material';
 
 import App from './App.jsx';
 import Home from './pages/Home';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
-// import SingleThought from './pages/SingleThought';//change
+import SingleProject from './pages/SingleProject';
 import Profile from './pages/Profile';
 import ErrorPage from './pages/ErrorPage';
 //add more and add them below
@@ -19,32 +19,33 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Home />
+        element: <Login/>
       }, {
-        path: '/login',
-        element: <Login />
+        path: '/home',
+        element: <Home />
       }, {
         path: '/signup',
         element: <Signup />
-      }, {
+      },
+      {
         path: '/profiles/:username',
         element: <Profile />
       },
-      //  {
-      //   path: '/me',
-      //   element: <Profile />
-      //  },
-      // {
-      //   path: '/thoughts/:thoughtId',
-      //   element: <SingleThought />
-      // }
+       {
+        path: '/profile',
+        element: <Profile />
+       },
+      {
+        path: '/project/:projectId',
+        element: <SingleProject />
+      }
     ]
   },
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <ThemeProvider theme={defaultTheme}>
-    <CssBaseline />
+    {/* <CssBaseline /> */}
     <RouterProvider router={router} />
-  </ThemeProvider>
+   </ThemeProvider>
 );

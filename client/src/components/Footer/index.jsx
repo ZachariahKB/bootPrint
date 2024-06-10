@@ -1,33 +1,55 @@
-import { useLocation, useNavigate } from 'react-router-dom';
+import React from 'react';
+import styled from 'styled-components';
+
+const FooterContainer = styled.footer`
+  width: 100%;
+  margin-top: auto;
+  background-color: #6c757d;
+  padding: 20px 0;
+  color: white;
+  text-align: center;
+`;
+
+const FooterContent = styled.div`
+  .emoji {
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+`;
+
+const GitHubLinks = styled.div`
+  margin-top: 10px;
+  a {
+    color: #61dafb;
+    margin: 0 10px;
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+`;
+
+const teamMembers = [
+  { name: 'ZachariahKB', github: 'https://github.com/ZachariahKB' },
+  { name: 'Pauleerama93', github: 'https://github.com/Pauleerama93' },
+  { name: 'Gitongah', github: 'https://github.com/gitongah' },
+  { name: 'Joshyy55', github: 'https://github.com/Joshyy55' },
+];
 
 const Footer = () => {
-  const location = useLocation();
-  const navigate = useNavigate();
   return (
-    <footer className="w-100 mt-auto bg-secondary p-4">
-      <div className="container text-center mb-5">
-        {location.pathname !== '/' && (
-          <button
-            className="btn btn-dark mb-3"
-            onClick={() => navigate(-1)}
-          >
-            &larr; Go Back
-          </button>
-        )}
-        <h4>
-          Made with{' '}
-          <span
-            className="emoji"
-            role="img"
-            aria-label="heart"
-            aria-hidden="false"
-          >
-            ❤️
-          </span>{' '}
-          by the Tech Thoughts team.
-        </h4>
-      </div>
-    </footer>
+    <FooterContainer>
+      <FooterContent>
+        Check us out at our GitHubs!
+        <GitHubLinks>
+          {teamMembers.map(member => (
+            <a key={member.name} href={member.github} target="_blank" rel="noopener noreferrer">
+              {member.name}
+            </a>
+          ))}
+        </GitHubLinks>
+      </FooterContent>
+    </FooterContainer>
   );
 };
 

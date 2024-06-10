@@ -1,55 +1,107 @@
 import { gql } from '@apollo/client';
 
 export const QUERY_USER = gql`
-  query user($username: String!) {
+query user($username: String) {
     user(username: $username) {
       _id
       username
       email
-    }
-  }
-`;
-
-export const QUERY_THOUGHTS = gql`
-  query getThoughts {
-    thoughts {
+      jobStatus
+      linkedin
+      projects {
       _id
-      thoughtText
-      thoughtAuthor
-      createdAt
-    }
-  }
-`;
-
-export const QUERY_SINGLE_THOUGHT = gql`
-  query getSingleThought($thoughtId: ID!) {
-    thought(thoughtId: $thoughtId) {
-      _id
-      thoughtText
-      thoughtAuthor
-      createdAt
-      comments {
-        _id
-        commentText
-        commentAuthor
+        title
+        githubRepo
+        description
         createdAt
+        contactInfo
+        comments {
+          _id
+          commentAuthor
+          commentText
+          createdAt
+      }
       }
     }
-  }
+}
 `;
 
+//getting a list of all the users
+export const QUERY_ALL_USER =gql`
+  query Users {
+  users {
+    username
+  }
+}
+`;
+//getting the projects list with all the comments
+export const QUERY_PROJECTS= gql`
+query Projects {
+  projects {
+    _id
+    title
+    description
+    githubRepo
+    contactInfo
+    projectAuthor
+    createdAt
+    comments {
+      commentAuthor
+      commentText
+      createdAt
+    }
+  }
+}
+`;
+//getting a single project with the project description, title and project author
+export const QUERY_SINGLE_PROJECT =gql`
+query Project($projectId: ID!) {
+  project(projectId: $projectId) {
+    description
+    title
+    projectAuthor
+    comments{
+    commentText
+    commentAuthor
+    createdAt
+    _id
+    }
+  }
+}
+`;
+//geting the current user and the projects the have
 export const QUERY_ME = gql`
   query me {
     me {
       _id
       username
       email
-      thoughts {
+      projects {
         _id
-        thoughtText
-        thoughtAuthor
+        description
+        projectAuthor
         createdAt
+        comments {
+          _id
+          commentAuthor
+          commentText
+          createdAt
+      }
       }
     }
   }
 `;
+
+// getting  all the resources in the database. if the user wants to  get a certain 
+//topic they can search using that topic
+export const QUERY_RESOURCES = gql`
+  query Resources($topic: String) {
+    resources(topic: $topic) {
+      topic
+      content
+      createdAt
+    }
+  }
+`;
+
+

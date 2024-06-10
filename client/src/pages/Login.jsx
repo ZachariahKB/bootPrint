@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Link as RouterLink, useNavigate, redirect } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../utils/mutations';
 import Auth from '../utils/auth';
@@ -22,8 +22,9 @@ function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
+      <Link color="inherit" href="https://github.com/ZachariahKB/project-3" target="_blank">
+         {/* Add a link to website here */}
+        BootPrint
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -36,7 +37,15 @@ const defaultTheme = createTheme();
 export default function SignInSide() {
   const [formState, setFormState] = useState({ email: '', password: '' });
   const [login, { error, data }] = useMutation(LOGIN_USER);
+  const [loginUser, setloginUser] = useState(false)
+  let navigate = useNavigate()
+  console.log("this is login user = ", loginUser)
 
+  useEffect(()=>{
+    if(loginUser){
+      return redirect("/home")
+    }
+  },[loginUser])
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormState({
@@ -52,6 +61,8 @@ export default function SignInSide() {
         variables: { ...formState },
       });
       Auth.login(data.login.token);
+      navigate("/home")
+      setloginUser(true)
     } catch (e) {
       console.error(e);
     }
@@ -60,6 +71,10 @@ export default function SignInSide() {
       password: '',
     });
   };
+  if(loginUser){
+    console.log("we are in!!!!!!!")
+    return navigate("/home")
+  }
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -144,7 +159,7 @@ export default function SignInSide() {
                     </Link>
                   </Grid> */}
                   <Grid item>
-                    <Link component={RouterLink} to="#" variant="body2">
+                    <Link component={RouterLink} to="/signup" variant="body2">
                       {"Don't have an account? Sign Up"}
                     </Link>
                   </Grid>

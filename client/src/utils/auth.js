@@ -34,13 +34,13 @@ class AuthService {
   // Login user by saving the token to local storage
   login(idToken) {
     localStorage.setItem('id_token', idToken);
-    window.location.assign('/');
+    window.location.assign('/home');
   }
 
   // Logout user by removing the token from local storage and reloading the page
   logout() {
     localStorage.removeItem('id_token');
-    window.location.reload();
+    window.location.assign('/');
   }
 }
 

@@ -6,7 +6,7 @@ import { ADD_COMMENT } from '../../utils/mutations';
 
 import Auth from '../../utils/auth';
 
-const CommentForm = ({ thoughtId }) => {
+const CommentForm = ({ projectId }) => {
   const [commentText, setCommentText] = useState('');
   const [characterCount, setCharacterCount] = useState(0);
 
@@ -18,13 +18,13 @@ const CommentForm = ({ thoughtId }) => {
     try {
       const { data } = await addComment({
         variables: {
-          thoughtId,
-          commentText,
-          commentAuthor: Auth.getProfile().data.username,
+          projectId,
+          commentText
         },
       });
 
       setCommentText('');
+      window.location.reload();
     } catch (err) {
       console.error(err);
     }
@@ -41,7 +41,7 @@ const CommentForm = ({ thoughtId }) => {
 
   return (
     <div>
-      <h4>What are your thoughts on this thought?</h4>
+      <h4>What are your thoughts on this project?</h4>
 
       {Auth.loggedIn() ? (
         <>

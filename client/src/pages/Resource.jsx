@@ -60,7 +60,7 @@ const Resource = () => {
         <ResourceForm />
         <div className="col-12 col-md-10 mb-5">
           <ResourceList
-            resources={resources}
+            resources ={resources }
             topic={`${user.username}'s resources...`}
             showTitle={true}
             // updateResources={updateResource} // Pass the function to update a resource

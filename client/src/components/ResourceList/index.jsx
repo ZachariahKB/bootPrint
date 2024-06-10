@@ -54,7 +54,7 @@ const ResourceList = ({
               <p>{resource.content}</p>
               {resource.resourceAuthor === currentUser && (
                 <>
-                  <button
+                  {/* <button
                     className="btn btn-secondary"
                     onClick={() => toggleUpdateForm(resource._id)}
                   >
@@ -65,7 +65,7 @@ const ResourceList = ({
                   )}
                   <button className="btn btn-danger" onClick={() => handleDelete(resource._id)}>
                     Delete
-                  </button>
+                  </button> */}
                 </>
               )}
             </div>

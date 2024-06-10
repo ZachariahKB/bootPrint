@@ -5,13 +5,13 @@ const resolvers = {
   Query: {
     // Find all users with their projects
     users: async () => {
-      return User.find().populate('projects');
+      return User.find().populate('projects').populate('resources');
     },
     // Find a single user and their projects
     user: async (parent, { username }, context) => {
       if (context.user) {
         if (username) {
-          return User.findOne({ username }).populate('projects');
+          return User.findOne({ username }).populate('projects').populate('resources');
         }
         return User.findOne({ _id: context.user._id }).populate('projects');
       }
@@ -35,7 +35,7 @@ const resolvers = {
     // Get the logged-in user's data
     me: async (parent, args, context) => {
       if (context.user) {
-        return User.findOne({ _id: context.user._id }).populate('projects');
+        return User.findOne({ _id: context.user._id }).populate('projects').populate('resources');
       }
       throw new AuthenticationError('You need to be logged in!');
     },

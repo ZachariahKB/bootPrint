@@ -9,6 +9,7 @@ import Popper from '@mui/material/Popper';
 import MenuItem from '@mui/material/MenuItem';
 import MenuList from '@mui/material/MenuList';
 import Stack from '@mui/material/Stack';
+import './header.css'; // Ensure this path is correct
 
 const Header = () => {
   const [open, setOpen] = useState(false);
@@ -59,66 +60,72 @@ const Header = () => {
           </Link>
           <p className="m-0">These Boots Are Made For Coding!</p>
         </div>
-        <div>
-          {location.pathname !== '/' && (
-            <button
-              className="btn btn-secondary"
-              onClick={() => navigate(-1)}
-            >
-              &larr; Go Back
-            </button>
+        <div className="flex-row align-center button-group">
+          {Auth.loggedIn() && (
+            <>
+              <Button
+                ref={anchorRef}
+                id="composition-button"
+                aria-controls={open ? 'composition-menu' : undefined}
+                aria-expanded={open ? 'true' : undefined}
+                aria-haspopup="true"
+                onClick={handleToggle}
+                variant="contained"
+                color="primary"
+                className="dashboard-button"  // Apply class
+              >
+                Dashboard
+              </Button>
+              {location.pathname !== '/' && (
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  onClick={() => navigate(-1)}
+                  className="button-spacing"  // Apply class
+                >
+                  &larr; Go Back
+                </Button>
+              )}
+              <Popper
+                open={open}
+                anchorEl={anchorRef.current}
+                role={undefined}
+                placement="bottom-start"
+                transition
+                disablePortal
+                style={{ zIndex: 1 }}
+              >
+                {({ TransitionProps, placement }) => (
+                  <Grow
+                    {...TransitionProps}
+                    style={{
+                      transformOrigin: placement === 'bottom-start' ? 'left top' : 'left bottom',
+                    }}
+                  >
+                    <Paper>
+                      <ClickAwayListener onClickAway={handleClose}>
+                        <MenuList
+                          autoFocusItem={open}
+                          id="composition-menu"
+                          aria-labelledby="composition-button"
+                          onKeyDown={handleListKeyDown}
+                        >
+                          <MenuItem onClick={handleClose}>
+                            <Link to="/profile">Profile</Link>
+                          </MenuItem>
+                          <MenuItem onClick={handleClose}>
+                            <Link to="/My Resources">My Resources</Link>
+                          </MenuItem>
+                          <MenuItem onClick={logout}>Logout</MenuItem>
+                        </MenuList>
+                      </ClickAwayListener>
+                    </Paper>
+                  </Grow>
+                )}
+              </Popper>
+            </>
           )}
         </div>
-        {Auth.loggedIn() && (
-          <Stack direction="row" spacing={2}>
-            <Button
-              ref={anchorRef}
-              id="composition-button"
-              aria-controls={open ? 'composition-menu' : undefined}
-              aria-expanded={open ? 'true' : undefined}
-              aria-haspopup="true"
-              onClick={handleToggle}
-            >
-              Dashboard
-            </Button>
-            <Popper
-              open={open}
-              anchorEl={anchorRef.current}
-              role={undefined}
-              placement="bottom-start"
-              transition
-              disablePortal
-            >
-              {({ TransitionProps, placement }) => (
-                <Grow
-                  {...TransitionProps}
-                  style={{
-                    transformOrigin: placement === 'bottom-start' ? 'left top' : 'left bottom',
-                  }}
-                >
-                  <Paper>
-                    <ClickAwayListener onClickAway={handleClose}>
-                      <MenuList
-                        autoFocusItem={open}
-                        id="composition-menu"
-                        aria-labelledby="composition-button"
-                        onKeyDown={handleListKeyDown}
-                      >
-                        <MenuItem onClick={handleClose}>
-                          <Link to="/profile">Profile</Link>
-                        </MenuItem>
-                        <MenuItem onClick={handleClose}>
-                          <Link to="/My Resources">My Resources</Link>
-                        </MenuItem>
-                        <MenuItem onClick={logout}>Logout</MenuItem>
-                      </MenuList>
-                    </ClickAwayListener>
-                  </Paper>
-                </Grow>
-              )}
-            </Popper>
-          </Stack>
-        )}
       </div>
     </header>
   );

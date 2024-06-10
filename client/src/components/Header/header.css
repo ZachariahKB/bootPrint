@@ -1,0 +1,14 @@
+.button-spacing {
+    margin-left: 20px; /* Adjust this value as needed */
+  }
+  
+  .dashboard-button {
+    margin-right: 20px; /* Adjust this value as needed */
+  }
+  
+  .button-group {
+    display: flex;
+    align-items: center;
+    gap: 20px; /* Add gap property to ensure spacing */
+  }
+  

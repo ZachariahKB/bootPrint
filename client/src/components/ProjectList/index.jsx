@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { REMOVE_PROJECT } from '../../utils/mutations';
-import { QUERY_PROJECTS } from '../../utils/queries';
 import CommentList from '../CommentList';
-import CommentForm from '../CommentForm';
+import CommentForm from '../CommentForm'; // Import CommentForm here
 import UpdateProjectForm from '../UpdateProjectForm';
 
 const ProjectList = ({
@@ -15,8 +14,10 @@ const ProjectList = ({
   showComment = true,
   updateProject,
   currentUser,
+  showCommentForm = true, // Add this prop to control the CommentForm rendering
 }) => {
   const [showUpdateForm, setShowUpdateForm] = useState({});
+  const [RemoveProject] = useMutation(REMOVE_PROJECT);
 
   const toggleUpdateForm = (projectId) => {
     setShowUpdateForm((prev) => ({
@@ -25,30 +26,9 @@ const ProjectList = ({
     }));
   };
   
-  const [RemoveProject] = useMutation(REMOVE_PROJECT, {
-    update(cache, {data: {removeProject}}) {
-      cache.modify({
-        fields: {
-          projects(existingProject = [], {readField}){
-            return existingProject.filter((project) => readField("_id", project) !== removeProject._id)
-          }
-        }
-      })
-      cache.modify({
-        fields: {
-          me(existingMeRef= {}){
-            return {
-              ...existingMeRef, 
-              projects: existingMeRef.projects.filter((project)=>  readField("_id", project) !== removeProject._id)
-            }
-          }
-        }
-      })
-    }
-  });
-
   async function handleDelete(projectId) {
     await RemoveProject({ variables: { projectId } });
+    // Refresh the page after delete
     window.location.reload();
   }
 
@@ -93,11 +73,9 @@ const ProjectList = ({
                 </>
               )}
             </div>
-            {showComment && (
-              <>
-                <CommentForm projectId={project._id} />
-                <CommentList comments={project.comments} />
-              </>
+            {showComment && <CommentList comments={project.comments} />}
+            {showCommentForm && showComment && ( // Conditionally render CommentForm
+              <CommentForm projectId={project._id} />
             )}
           </div>
         ))}

@@ -92,7 +92,7 @@ export const UPDATE_USER = gql`
 
 // updating a project's details
 export const UPDATE_PROJECT = gql`
-  mutation UpdateProject($description: String, $projectId: ID!, $title: String, $contactInfo: String, $githubRepo: String, $projectAuthor: String) {
+  mutation updateProject($description: String, $projectId: ID!, $title: String, $contactInfo: String, $githubRepo: String, $projectAuthor: String) {
   updateProject(description: $description, projectId: $projectId, title: $title, contactInfo: $contactInfo, githubRepo: $githubRepo, projectAuthor: $projectAuthor) {
     contactInfo
     description

@@ -4,40 +4,43 @@ import { UPDATE_PROJECT} from '../../utils/mutations';
 import { QUERY_PROJECTS} from '../../utils/queries';
 // import ProjectForm from '../ProjectForm'; TODO: Check to see if we still need this
 
-
-const UpdateProjectForm = ({ project, updateProject }) => {
+// , updateProject
+const UpdateProjectForm = ({ project }) => {
   const [title, setTitle] = useState(project.title);
   const [description, setDescription] = useState(project.description);
   const [githubRepo, setGithubRepo] = useState(project.githubRepo);
   const [contactInfo, setContactInfo] = useState(project.contactInfo);
 
-  const [updateProjectMutation] = useMutation(UPDATE_PROJECT, {update(cache, { data: { updateProject } }) {
-    cache.modify({
-      feilds: {
-        me(existingMeRef= {}){
-          const updatedProjectRef= cache.writeFragment({
-            data: updateProject,
-            fragment: gql`
-            _id
-            title 
-            description
-            githubRepo
-            contactInfo` 
-          })
-          return {
-            ...existingMeRef, 
-            projects: existingMeRef.projects.map((project)=> project._id === updateProject._id ? updatedProjectRef: project)
-          }
-        }
-      }
-    })
-  }});
+  const [updateProject] = useMutation(UPDATE_PROJECT
+    //TODO: Try to figure this one
+    // , {update(cache, { data: { updateProject } }) {
+    // cache.modify({
+    //   feilds: {
+    //     me(existingMeRef= {}){
+    //       const updatedProjectRef= cache.writeFragment({
+    //         data: updateProject,
+    //         fragment: gql`
+    //         _id
+    //         title 
+    //         description
+    //         githubRepo
+    //         contactInfo` 
+    //       })
+    //       return {
+    //         ...existingMeRef, 
+    //         projects: existingMeRef.projects.map((project)=> project._id === updateProject._id ? updatedProjectRef: project)
+    //       }
+    //     }
+    //   }
+    // })
+  // }}
+);
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
     try {
-      const { data } = await updateProjectMutation({
+      const { data } = await updateProject({
         variables: {
           projectId: project._id,
           title,
@@ -45,10 +48,10 @@ const UpdateProjectForm = ({ project, updateProject }) => {
           githubRepo,
           contactInfo,
         },
-        refetchQueries: [QUERY_PROJECTS],
+        // refetchQueries: [QUERY_PROJECTS],
       });
 
-      updateProject(data.updateProject); // Update projects state in Profile
+      // updateProject(data.updateProject); // Update projects state in Profile
       window.location.reload();
 
     } catch (err) {

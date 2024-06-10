@@ -117,7 +117,7 @@ const Header = () => {
                             <Link to="/profile">Profile</Link>
                           </MenuItem>
                           <MenuItem onClick={handleClose}>
-                            <Link to="/My Resources">My Resources</Link>
+                            <Link to="/resources">My Resources</Link>
                           </MenuItem>
                           <MenuItem onClick={logout}>Logout</MenuItem>
                         </MenuList>

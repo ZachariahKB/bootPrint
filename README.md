@@ -3,9 +3,8 @@
 ## Project Overview
 Completing a coding bootcamp can be a daunting and overwhelming experience. This project aims to develop a comprehensive website dedicated to bootcamp alumni and prospective students, providing them with valuable resources, networking opportunities, and support to transition smoothly into their professional careers.
 
-## Table of Contents (Optional)
+## Table of Contents
 
-If your README is long, add a table of contents to make it easy for users to find what they need.
 
 - [Features](#features)
 - [Project Requirements](#project-requirements)
@@ -17,6 +16,7 @@ If your README is long, add a table of contents to make it easy for users to fin
 - [Technologies Used](#technologies-used)
 - [Deployment](#deployment)
 - [Installation](#installation)
+- [Contacts](#contacts)
 
 
 
@@ -28,7 +28,7 @@ If your README is long, add a table of contents to make it easy for users to fin
 - **Career Services:** Long-term career support services such as exploring career options, developing professional goals, addressing gaps in work experience, networking best practices, and more.
 
 ## Project Requirements
-For this project, your group will conceive and execute a design that solves a real-world problem. You will create a collaborative MERN-stack single-page application that combines a scalable MongoDB back end, a GraphQL API, and an Express.js and Node.js server with a React front end, implementing user authentication with JWT.
+For this project our group conceived and executed a design that solves a real-world problem. We created a collaborative MERN-stack single-page application that combines a scalable MongoDB back end, a GraphQL API, and an Express.js and Node.js server with a React front end, implementing user authentication with JWT.
 
 ### Key Requirements
 - **Front End:** Use React with Material UI.
@@ -87,8 +87,14 @@ The project is deployed on Render. Here are the deployment guides:
 ## Installation
 To install and run this project locally, follow these steps:
 
-1. Clone the Repository:
+1. Install and run:
    ```sh
    npm i
    npm run dev
    
+## contacts 
+
+https://github.com/gitongah \
+https://github.com/Pauleerama93 \
+https://github.com/ZachariahKB \
+https://github.com/Joshyy55 

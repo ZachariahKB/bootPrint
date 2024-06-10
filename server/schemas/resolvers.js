@@ -20,6 +20,7 @@ const resolvers = {
     // Get all projects
     projects: async (parent, { username }) => {
       const params = username ? { username } : {};
+      //TODO : I think this is where we are 
       return Project.find(params).sort({ createdAt: -1 });
     },
     // Get a single project
@@ -90,7 +91,7 @@ const resolvers = {
         const resources = await Resources.create({
           topic,
           content,
-          resourcesAuthor: context.user.username,
+          resourceAuthor: context.user.username,
         });
 
         await User.findOneAndUpdate(

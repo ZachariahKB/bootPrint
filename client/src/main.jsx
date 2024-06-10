@@ -9,6 +9,7 @@ import Login from './pages/Login';
 import SingleProject from './pages/SingleProject';
 import Profile from './pages/Profile';
 import ErrorPage from './pages/ErrorPage';
+import Resource from './pages/Resource';
 //add more and add them below
 const defaultTheme = createTheme();
 const router = createBrowserRouter([
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
       }, {
         path: '/signup',
         element: <Signup />
+      },
+      {
+        path: '/resources',
+        element: <Resource />
       },
       {
         path: '/profiles/:username',

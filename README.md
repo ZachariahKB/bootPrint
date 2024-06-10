@@ -3,6 +3,23 @@
 ## Project Overview
 Completing a coding bootcamp can be a daunting and overwhelming experience. This project aims to develop a comprehensive website dedicated to bootcamp alumni and prospective students, providing them with valuable resources, networking opportunities, and support to transition smoothly into their professional careers.
 
+## Table of Contents (Optional)
+
+If your README is long, add a table of contents to make it easy for users to find what they need.
+
+- [Features](#features)
+- [Project Requirements](#project-requirements)
+- [Key Requirements](#key-requirements)
+- [Functional Requirements](#functional-requirements)
+- [Problem Statement](#problem-statement)
+- [Proposed Solution](#proposed-solution)
+- [Career Services Offered Long-Term](#career-services-offered-long-term)
+- [Technologies Used](#technologies-used)
+- [Deployment](#deployment)
+- [Installation](#installation)
+
+
+
 ## Features
 - **Note Sharing and Learning Strategies:** Alumni can post notes, study guides, and personal strategies that helped them succeed during the bootcamp.
 - **Job Opportunities and Networking:** A section for sharing job opportunities, internships, and freelance projects. Alumni can also announce their job placements.
@@ -13,12 +30,12 @@ Completing a coding bootcamp can be a daunting and overwhelming experience. This
 ## Project Requirements
 For this project, your group will conceive and execute a design that solves a real-world problem. You will create a collaborative MERN-stack single-page application that combines a scalable MongoDB back end, a GraphQL API, and an Express.js and Node.js server with a React front end, implementing user authentication with JWT.
 
-### Key Requirements:
+### Key Requirements
 - **Front End:** Use React with Material UI.
 - **Back End:** Use GraphQL with a Node.js and Express.js server, MongoDB with Mongoose ODM.
 - **Deployment:** Deploy using Render.
 
-### Functional Requirements:
+### Functional Requirements
 - Use queries and mutations for retrieving, adding, updating, and deleting data.
 - Ensure the application is responsive, interactive, and has a polished UI.
 - Implement authentication using JWT.
@@ -38,7 +55,7 @@ To address these challenges, we propose the development of a comprehensive websi
 
 This platform aims to foster a supportive community that helps bootcamp graduates transition smoothly into their professional careers while providing invaluable insights to new and upcoming students.
 
-### Career Services Offered Long-Term:
+### Career Services Offered Long-Term
 - Exploring career options
 - Developing professional goals
 - Researching industries of interest
@@ -72,5 +89,6 @@ To install and run this project locally, follow these steps:
 
 1. Clone the Repository:
    ```sh
-   git clone https://github.com/ZachariahKB/project-3.git
-   cd project-3
+   npm i
+   npm run dev
+   

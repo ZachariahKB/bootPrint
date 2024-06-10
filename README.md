@@ -3,6 +3,23 @@
 ## Project Overview
 Completing a coding bootcamp can be a daunting and overwhelming experience. This project aims to develop a comprehensive website dedicated to bootcamp alumni and prospective students, providing them with valuable resources, networking opportunities, and support to transition smoothly into their professional careers.
 
+## Table of Contents
+
+
+- [Features](#features)
+- [Project Requirements](#project-requirements)
+- [Key Requirements](#key-requirements)
+- [Functional Requirements](#functional-requirements)
+- [Problem Statement](#problem-statement)
+- [Proposed Solution](#proposed-solution)
+- [Career Services Offered Long-Term](#career-services-offered-long-term)
+- [Technologies Used](#technologies-used)
+- [Deployment](#deployment)
+- [Installation](#installation)
+- [Contacts](#contacts)
+
+
+
 ## Features
 - **Note Sharing and Learning Strategies:** Alumni can post notes, study guides, and personal strategies that helped them succeed during the bootcamp.
 - **Job Opportunities and Networking:** A section for sharing job opportunities, internships, and freelance projects. Alumni can also announce their job placements.
@@ -11,19 +28,19 @@ Completing a coding bootcamp can be a daunting and overwhelming experience. This
 - **Career Services:** Long-term career support services such as exploring career options, developing professional goals, addressing gaps in work experience, networking best practices, and more.
 
 ## Project Requirements
-For this project, your group will conceive and execute a design that solves a real-world problem. You will create a collaborative MERN-stack single-page application that combines a scalable MongoDB back end, a GraphQL API, and an Express.js and Node.js server with a React front end, implementing user authentication with JWT.
+For this project our group conceived and executed a design that solves a real-world problem. We created a collaborative MERN-stack single-page application that combines a scalable MongoDB back end, a GraphQL API, and an Express.js and Node.js server with a React front end, implementing user authentication with JWT.
 
-### Key Requirements:
-- **Front End:** Use React with Material UI.
-- **Back End:** Use GraphQL with a Node.js and Express.js server, MongoDB with Mongoose ODM.
-- **Deployment:** Deploy using Render.
+### Key Requirements
+- **Front End:** Used React with Material UI.
+- **Back End:** Used GraphQL with a Node.js and Express.js server, MongoDB with Mongoose ODM.
+- **Deployment:** Deployed using Render.
 
-### Functional Requirements:
-- Use queries and mutations for retrieving, adding, updating, and deleting data.
-- Ensure the application is responsive, interactive, and has a polished UI.
-- Implement authentication using JWT.
-- Protect sensitive API key information on the server.
-- Maintain a clean repository adhering to quality coding standards.
+### Functional Requirements
+- Used queries and mutations for retrieving, adding, updating, and deleting data.
+- Ensured the application is responsive, interactive, and has a polished UI.
+- Implemented authentication using JWT.
+- Protected sensitive API key information on the server.
+- Maintained a clean repository adhering to quality coding standards.
 
 ## Problem Statement
 Completing a coding bootcamp can be an overwhelming experience for many students due to the intense pace and dense learning materials. Graduates often feel isolated and uncertain about their next steps despite acquiring valuable skills. Additionally, prospective students lack a centralized platform to access firsthand reviews and tips from previous students.
@@ -38,7 +55,7 @@ To address these challenges, we propose the development of a comprehensive websi
 
 This platform aims to foster a supportive community that helps bootcamp graduates transition smoothly into their professional careers while providing invaluable insights to new and upcoming students.
 
-### Career Services Offered Long-Term:
+### Career Services Offered Long-Term
 - Exploring career options
 - Developing professional goals
 - Researching industries of interest
@@ -70,7 +87,14 @@ The project is deployed on Render. Here are the deployment guides:
 ## Installation
 To install and run this project locally, follow these steps:
 
-1. Clone the Repository:
+1. Install and run:
    ```sh
-   git clone https://github.com/ZachariahKB/project-3.git
-   cd project-3
+   npm i
+   npm run dev
+   
+## contacts 
+
+https://github.com/gitongah \
+https://github.com/Pauleerama93 \
+https://github.com/ZachariahKB \
+https://github.com/Joshyy55 

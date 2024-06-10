@@ -31,16 +31,16 @@ Completing a coding bootcamp can be a daunting and overwhelming experience. This
 For this project our group conceived and executed a design that solves a real-world problem. We created a collaborative MERN-stack single-page application that combines a scalable MongoDB back end, a GraphQL API, and an Express.js and Node.js server with a React front end, implementing user authentication with JWT.
 
 ### Key Requirements
-- **Front End:** Use React with Material UI.
-- **Back End:** Use GraphQL with a Node.js and Express.js server, MongoDB with Mongoose ODM.
-- **Deployment:** Deploy using Render.
+- **Front End:** Used React with Material UI.
+- **Back End:** Used GraphQL with a Node.js and Express.js server, MongoDB with Mongoose ODM.
+- **Deployment:** Deployed using Render.
 
 ### Functional Requirements
-- Use queries and mutations for retrieving, adding, updating, and deleting data.
-- Ensure the application is responsive, interactive, and has a polished UI.
-- Implement authentication using JWT.
-- Protect sensitive API key information on the server.
-- Maintain a clean repository adhering to quality coding standards.
+- Used queries and mutations for retrieving, adding, updating, and deleting data.
+- Ensured the application is responsive, interactive, and has a polished UI.
+- Implemented authentication using JWT.
+- Protected sensitive API key information on the server.
+- Maintained a clean repository adhering to quality coding standards.
 
 ## Problem Statement
 Completing a coding bootcamp can be an overwhelming experience for many students due to the intense pace and dense learning materials. Graduates often feel isolated and uncertain about their next steps despite acquiring valuable skills. Additionally, prospective students lack a centralized platform to access firsthand reviews and tips from previous students.

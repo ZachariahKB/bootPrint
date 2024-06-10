@@ -1,6 +1,36 @@
-# <Your-Project-Title>
+Project Overview
+Completing a coding bootcamp can be a daunting and overwhelming experience. This project aims to develop a comprehensive website dedicated to bootcamp alumni and prospective students, providing them with valuable resources, networking opportunities, and support to transition smoothly into their professional careers.
 
-## Description
+Features
+Note Sharing and Learning Strategies: Alumni can post notes, study guides, and personal strategies that helped them succeed during the bootcamp.
+Job Opportunities and Networking: A section for sharing job opportunities, internships, and freelance projects. Alumni can also announce their job placements.
+Bootcamp Reviews and Tips: A review section where alumni can provide detailed feedback on their bootcamp experience, including tips on navigating the course.
+Community Support: Forums and discussion boards for alumni to stay connected, offer mutual support, and share updates on their career progress.
+Career Services: Long-term career support services such as exploring career options, developing professional goals, addressing gaps in work experience, networking best practices, and more.
+Project Requirements
+For this project, your group will conceive and execute a design that solves a real-world problem. You will create a collaborative MERN-stack single-page application that combines a scalable MongoDB back end, a GraphQL API, and an Express.js and Node.js server with a React front end, implementing user authentication with JWT.
+
+Key Requirements:
+Front End: Use React.
+Pick a framework: Material UI, Daisy UI, Fluent UI, Bulma React UI
+Chosen Framework: Material UI
+Back End: Use GraphQL with a Node.js and Express.js server.
+Database: Use MongoDB and the Mongoose ODM.
+Deployment: Deploy using Render.
+Render Deployment Guide
+MongoDB Atlas Setup Guide
+Functional Requirements:
+Use queries and mutations for retrieving, adding, updating, and deleting data.
+Ensure the application is responsive, interactive, and has a polished UI.
+Implement authentication using JWT.
+Protect sensitive API key information on the server.
+Maintain a clean repository adhering to quality coding standards (file structure, naming conventions, best practices for class and id naming conventions, indentation, high-quality comments, etc.).
+Include a high-quality README with a unique name, description, technologies used, screenshot, and link to the deployed application.
+Problem Statement
+Completing a coding bootcamp can be an overwhelming experience for many students due to the intense pace and dense learning materials. Graduates often feel isolated and uncertain about their next steps despite acquiring valuable skills. Additionally, prospective students lack a centralized platform to access firsthand reviews and tips from previous students.
+
+Proposed Solution
+To address these challenges, we propose the development of a comprehensive website dedicated to bootcamp alumni and prospective students. This platform will offer:
 
 Note Sharing and Learning Strategies: Alumni can post their notes, study guides, and personal strategies.
 Job Opportunities and Networking: A dedicated section for sharing job opportunities, internships, and freelance projects. Alumni can also announce their job placements.
@@ -8,47 +38,23 @@ Bootcamp Reviews and Tips: A review section for detailed feedback on the bootcam
 Community Support: Forums and discussion boards for alumni to stay connected, offer support, and share career progress updates.
 This platform aims to foster a supportive community that helps bootcamp graduates transition smoothly into their professional careers while providing invaluable insights to new and upcoming students.
 
-## Table of Contents (Optional)
+Career Services Offered Long-Term:
+Exploring career options
+Developing professional goals
+Researching industries of interest
+Navigating a career pivot
+Addressing gaps in work experience
+Organizing your job search
+Networking best practices
+Interviewing strategies
+Conducting mock interviews
+Negotiating offers or salaries
+And more!
+Installation
+To install and run this project locally, follow these steps:
 
-If your README is long, add a table of contents to make it easy for users to find what they need.
+Clone the Repository:git clone https://github.com/ZachariahKB/project-3.git
+cd project-3
 
-- [Installation](#installation)
-- [Usage](#usage)
-- [Credits](#credits)
-- [License](#license)
+Install Client Dependencies: npm install
 
-## Installation
-
-What are the steps required to install your project? Provide a step-by-step description of how to get the development environment running.
-
-## Usage
-
-Provide instructions and examples for use. Include screenshots as needed.
-
-To add a screenshot, create an `assets/images` folder in your repository and upload your screenshot to it. Then, using the relative filepath, add it to your README using the following syntax:
-
-    ```md
-    ![alt text](assets/images/screenshot.png)
-    ```
-
-## Credits
-
-List your collaborators, if any, with links to their GitHub profiles.
-
-If you used any third-party assets that require attribution, list the creators with links to their primary web presence in this section.
-
-If you followed tutorials, include links to those here as well.
-
-## License
-
-The last section of a high-quality README file is the license. This lets other developers know what they can and cannot do with your project. If you need help choosing a license, refer to [https://choosealicense.com/](https://choosealicense.com/).
-
-## Features
-
-If your project has a lot of features, list them here.
-
-## How to Contribute
-
-If you created an application or package and would like other developers to contribute it, you can include guidelines for how to do so. The [Contributor Covenant](https://www.contributor-covenant.org/) is an industry standard, but you can always write your own if you'd prefer.
-
-## Tests

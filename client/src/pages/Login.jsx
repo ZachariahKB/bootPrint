@@ -146,7 +146,7 @@ export default function SignInSide() {
                   </Grid> */}
                   <Grid item>
                     {/*TODO: Add link to signup page (#) */}
-                    <Link component={RouterLink} to="#" variant="body2">
+                    <Link component={RouterLink} to="/signup" variant="body2">
                       {"Don't have an account? Sign Up"}
                     </Link>
                   </Grid>

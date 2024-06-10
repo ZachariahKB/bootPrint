@@ -41,6 +41,12 @@ const userSchema = new Schema({
       ref: 'Project',
     },
   ],
+  resources: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Resources',
+    },
+  ]
 });
 
 userSchema.pre('save', async function (next) {

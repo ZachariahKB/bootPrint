@@ -6,6 +6,12 @@ const resourcesSchema = new Schema({
     type:String,
     required: true,
   },
+//
+   resourceAuthor: {
+    type: String,
+    required: true
+  },
+
   content:{
     type:String,
     required: true,

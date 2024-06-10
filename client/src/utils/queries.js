@@ -22,6 +22,12 @@ query user($username: String) {
           createdAt
       }
       }
+      resources {
+        content
+        createdAt
+        resourceAuthor
+        topic
+      }
     }
 }
 `;
@@ -78,18 +84,24 @@ export const QUERY_ME = gql`
       email
       projects {
         _id
-        title
         description
-        githubRepo
-        contactInfo
         projectAuthor
         createdAt
+        githubRepo
+        title
+        contactInfo
         comments {
-          _id
           commentAuthor
           commentText
           createdAt
+          _id
+        }
       }
+      resources {
+        content
+        createdAt
+        topic
+        resourceAuthor
       }
     }
   }
@@ -98,13 +110,14 @@ export const QUERY_ME = gql`
 // getting  all the resources in the database. if the user wants to  get a certain 
 //topic they can search using that topic
 export const QUERY_RESOURCES = gql`
-  query Resources($topic: String) {
-    resources(topic: $topic) {
-      topic
-      content
-      createdAt
-    }
+  query Query($topic: String) {
+  resources(topic: $topic) {
+    content
+    createdAt
+    resourceAuthor
+    topic
   }
+}
 `;
 
 

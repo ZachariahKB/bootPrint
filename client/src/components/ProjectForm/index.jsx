@@ -16,11 +16,9 @@ const ProjectForm = () => {
 
   const [addProject, { error }] = useMutation(ADD_PROJECT, {
     refetchQueries: [
-      QUERY_PROJECTS,
-      'getProject',
-      QUERY_ME,
-      'me'
-    ]
+      { query: QUERY_PROJECTS },
+      { query: QUERY_ME }
+    ],
   });
 
   const handleFormSubmit = async (event) => {
@@ -77,9 +75,8 @@ const ProjectForm = () => {
       {Auth.loggedIn() ? (
         <>
           <p
-            className={`m-0 ${
-              characterCount === 280 || error ? 'text-danger' : ''
-            }`}
+            className={`m-0 ${characterCount === 280 || error ? 'text-danger' : ''
+              }`}
           >
             Character Count: {characterCount}/280
           </p>

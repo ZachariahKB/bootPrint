@@ -111,6 +111,9 @@ const Header = () => {
                           onKeyDown={handleListKeyDown}
                         >
                           <MenuItem onClick={handleClose}>
+                            <Link to="/home">Home</Link>
+                          </MenuItem>
+                          <MenuItem onClick={handleClose}>
                             <Link to="/profile">Profile</Link>
                           </MenuItem>
                           <MenuItem onClick={handleClose}>

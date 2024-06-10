@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { Link as RouterLink, useNavigate, redirect } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link as RouterLink } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../utils/mutations';
 import Auth from '../utils/auth';
@@ -22,9 +22,9 @@ function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
-      <Link color="inherit" href="https://github.com/ZachariahKB/project-3" target="_blank">
+      <Link color="inherit" href="https://mui.com/">
          {/* Add a link to website here */}
-        BootPrint
+        Your Website
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -37,15 +37,7 @@ const defaultTheme = createTheme();
 export default function SignInSide() {
   const [formState, setFormState] = useState({ email: '', password: '' });
   const [login, { error, data }] = useMutation(LOGIN_USER);
-  const [loginUser, setloginUser] = useState(false)
-  let navigate = useNavigate()
-  console.log("this is login user = ", loginUser)
 
-  useEffect(()=>{
-    if(loginUser){
-      return redirect("/home")
-    }
-  },[loginUser])
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormState({
@@ -61,8 +53,6 @@ export default function SignInSide() {
         variables: { ...formState },
       });
       Auth.login(data.login.token);
-      navigate("/home")
-      setloginUser(true)
     } catch (e) {
       console.error(e);
     }
@@ -71,10 +61,6 @@ export default function SignInSide() {
       password: '',
     });
   };
-  if(loginUser){
-    console.log("we are in!!!!!!!")
-    return navigate("/home")
-  }
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -86,7 +72,7 @@ export default function SignInSide() {
           sm={4}
           md={7}
           sx={{
-            backgroundImage: 'url(https://source.unsplash.com/random?wallpapers)',
+            backgroundImage: 'url(https://images.unsplash.com/photo-1530296688540-3a317e00379d?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8bG9uZyUyMHJvYWR8ZW58MHx8MHx8fDA%3D)',
             backgroundRepeat: 'no-repeat',
             backgroundColor: (t) =>
               t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
@@ -159,7 +145,8 @@ export default function SignInSide() {
                     </Link>
                   </Grid> */}
                   <Grid item>
-                    <Link component={RouterLink} to="/signup" variant="body2">
+                    {/*TODO: Add link to signup page (#) */}
+                    <Link component={RouterLink} to="#" variant="body2">
                       {"Don't have an account? Sign Up"}
                     </Link>
                   </Grid>
@@ -178,5 +165,5 @@ export default function SignInSide() {
     </ThemeProvider>
   );
 }
-
+  
 

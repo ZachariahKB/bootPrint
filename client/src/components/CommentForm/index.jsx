@@ -1,9 +1,7 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
-
 import { ADD_COMMENT } from '../../utils/mutations';
-
 import Auth from '../../utils/auth';
 
 const CommentForm = ({ projectId }) => {
@@ -16,14 +14,15 @@ const CommentForm = ({ projectId }) => {
     event.preventDefault();
 
     try {
-       await addComment({
+      await addComment({
         variables: {
           projectId,
-          commentText
+          commentText,
         },
       });
 
       setCommentText('');
+      // Optionally, you may want to update the cache to reflect the new comment
     } catch (err) {
       console.error(err);
     }
@@ -44,11 +43,7 @@ const CommentForm = ({ projectId }) => {
 
       {Auth.loggedIn() ? (
         <>
-          <p
-            className={`m-0 ${
-              characterCount === 280 || error ? 'text-danger' : ''
-            }`}
-          >
+          <p className={`m-0 ${characterCount === 280 || error ? 'text-danger' : ''}`}>
             Character Count: {characterCount}/280
             {error && <span className="ml-2">{error.message}</span>}
           </p>

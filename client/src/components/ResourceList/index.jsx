@@ -1,5 +1,5 @@
 import { useState } from 'react';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { REMOVE_RESOURCE } from '../../utils/mutations';
 
@@ -8,7 +8,7 @@ import UpdateResourceForm from '../UpdateProjectForm';
 const ResourceList = ({
   resources,
   topic,
-  updateResources,
+  showUsername = true,
   showTitle = true,
   currentUser,
 }) => {
@@ -46,8 +46,16 @@ const ResourceList = ({
           <div key={resource._id} className="card mb-3">
             <h4 className="card-header bg-primary text-light p-2 m-0">
               <div>
-                Res Topic: {resource.topic}
+                Resource Topic: {resource.topic}
                 <br />
+                {showUsername && (
+                  <Link className="text-light" to={`/profiles/${resource.resourceAuthor}`}>
+                    {resource.resourceAuthor} <br />
+                    <span style={{ fontSize: '1rem' }}>
+                      Resource created on: {resource.createdAt}
+                    </span>
+                  </Link>
+                )}
               </div>
             </h4>
             <div className="card-body bg-light p-2">

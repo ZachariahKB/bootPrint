@@ -2,28 +2,31 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import ResourceList from '../components/ResourceList';
-import { QUERY_USER, QUERY_ME } from '../utils/queries';
+import { QUERY_USER, QUERY_ME, QUERY_RESOURCES } from '../utils/queries';
 import ResourceForm from '../components/ResourceForm';
 
 const Resource = () => {
   const { username } = useParams();
 
   // Use QUERY_ME if no username is provided in URL
-  const { loading, data } = useQuery(username ? QUERY_USER : QUERY_ME, {
+  const { loading: userLoading, data: userData } = useQuery(username ? QUERY_USER : QUERY_ME, {
     variables: { username },
   });
 
+  // Query to get all resources
+  const { loading: resourcesLoading, data: resourcesData } = useQuery(QUERY_RESOURCES);
+
   // Get the user data from the query result
-  const user = data?.me || data?.user || {};
+  const user = userData?.me || userData?.user || {};
 
   // State for resources
   const [resources, setResources] = useState([]);
 
   useEffect(() => {
-    if (user.resources) {
-      setResources(user.resources);
+    if (resourcesData?.resources) {
+      setResources(resourcesData.resources);
     }
-  }, [user.resources]);
+  }, [resourcesData]);
 
   const updateResource = (updatedResource) => {
     setResources((prevResources) =>
@@ -34,7 +37,7 @@ const Resource = () => {
   };
 
   // Handle loading state
-  if (loading) {
+  if (userLoading || resourcesLoading) {
     return <div>Loading...</div>;
   }
 
@@ -48,22 +51,19 @@ const Resource = () => {
     );
   }
 
-  console.log('User:', user);
-  console.log('Resources:', resources);
-
   return (
     <div>
       <div className="flex-row justify-center mb-3">
         <h2 className="col-12 col-md-10 bg-dark text-light p-3 mb-5">
-          Viewing {username ? `${user.username}'s` : 'your'} profile.
+          Resources
+  
         </h2>
         <ResourceForm />
         <div className="col-12 col-md-10 mb-5">
           <ResourceList
-            resources ={resources }
-            topic={`${user.username}'s resources...`}
+            resources={resources}
+            title="All Resources"
             showTitle={true}
-            // updateResources={updateResource} // Pass the function to update a resource
             currentUser={user.username}  // Pass the current logged-in user's username
           />
         </div>

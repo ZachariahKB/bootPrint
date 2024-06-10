@@ -24,13 +24,13 @@ const Profile = () => {
     }
   }, [user.projects]);
 
-  const updateProject = (updatedProject) => {
-    setProjects((prevProjects) =>
-      prevProjects.map((project) =>
-        project._id === updatedProject._id ? updatedProject : project
-      )
-    );
-  };
+  // const updateProject = (updatedProject) => {
+  //   setProjects((prevProjects) =>
+  //     prevProjects.map((project) =>
+  //       project._id === updatedProject._id ? updatedProject : project
+  //     )
+  //   );
+  // };
   
   // Handle loading state
   if (loading) {
@@ -60,7 +60,7 @@ const Profile = () => {
             showTitle={true}
             showUsername={!username}  // Only show username if viewing other profiles
             showComment={true}  // Show comments for all profiles
-            updateProject={updateProject}  // Pass the function to update a project
+            // updateProject={updateProject}  // Pass the function to update a project
             currentUser={user.username}  // Pass the current logged-in user's username
           />
         </div>

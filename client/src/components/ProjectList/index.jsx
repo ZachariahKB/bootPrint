@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { REMOVE_PROJECT } from '../../utils/mutations';
 import { QUERY_PROJECTS } from '../../utils/queries';
@@ -17,7 +17,7 @@ const ProjectList = ({
   currentUser,
 }) => {
   const [showUpdateForm, setShowUpdateForm] = useState({});
-
+  const nav = useNavigate();
   const toggleUpdateForm = (projectId) => {
     setShowUpdateForm((prev) => ({
       ...prev,
@@ -25,30 +25,34 @@ const ProjectList = ({
     }));
   };
   
-  const [RemoveProject] = useMutation(REMOVE_PROJECT, {
-    update(cache, {data: {removeProject}}) {
-      cache.modify({
-        fields: {
-          projects(existingProject = [], {readField}){
-            return existingProject.filter((project) => readField("_id", project) !== removeProject._id)
-          }
-        }
-      })
-      cache.modify({
-        fields: {
-          me(existingMeRef= {}){
-            return {
-              ...existingMeRef, 
-              projects: existingMeRef.projects.filter((project)=>  readField("_id", project) !== removeProject._id)
-            }
-          }
-        }
-      })
-    }
-  });
+  const [RemoveProject] = useMutation(REMOVE_PROJECT
+    // , {
+    // update(cache, {data: {removeProject}}) {
+    //   cache.modify({
+    //     fields: {
+    //       projects(existingProject = [], {readField}){
+    //         return existingProject.filter((project) => readField("_id", project) !== removeProject._id)
+    //       }
+    //     }
+    //   })
+      // cache.modify({
+      //   fields: {
+      //     me(existingMeRef= {}){
+      //       return {
+      //         ...existingMeRef, 
+      //         projects: existingMeRef.projects.filter((project)=>  readField("_id", project) !== removeProject._id)
+      //       }
+      //     }
+      //   }
+      // })
+  //   }
+  // }
+);
 
   async function handleDelete(projectId) {
+    console.log("inside")
     await RemoveProject({ variables: { projectId } });
+    // nav("/profile")
     window.location.reload();
   }
 

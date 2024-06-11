@@ -14,6 +14,7 @@ Completing a coding bootcamp can be a daunting and overwhelming experience. This
 - [Deployment](#deployment)
 - [Installation](#installation)
 - [Credits](#credits)
+- [Sreenshots](#screenshots)
 - [Important Links](#important-links)
 - [Contributing](#contributing)
 - [License](#license)

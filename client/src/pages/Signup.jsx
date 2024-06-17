@@ -134,7 +134,7 @@ export default function SignUp() {
           </Box>
           {data && (
             <Typography variant="body2" color="text.secondary" align="center">
-              Success! You may now head <Link href="/">back to the homepage</Link>.
+              Success! You may now head <Link href="/home">back to the homepage</Link>.
             </Typography>
           )}
           {error && (
